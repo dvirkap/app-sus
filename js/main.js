@@ -8,6 +8,6 @@ window.vueApp = new Vue({
     el: '#app',
     router: myRouter,
     components: {
-        // emailapp
+        // emailApp
     }
 })
