@@ -6,7 +6,7 @@ import aboutCmp from './apps/pages/about-cmp.js';
 
 const routes = [
     { path: '/', component: homeCmp },
-    { path: '/about', component: aboutCmp }
+    { path: '/about', component: aboutCmp },
     // { path: '/books', component: booksApp },
     // { path: '/books/:bookId', component: bookDetails },
     // { path: '/addbook', component: booksAdd },
