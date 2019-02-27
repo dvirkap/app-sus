@@ -11,6 +11,21 @@
 </head>
 
 <body>
+    <div id="app">
+        <nav>
+            <router-link to="/" exact>Home</router-link>
+            <router-link to="/keep">Keep</router-link>
+            <router-link to="/email">Email</router-link>
+            <router-link to="/about">About</router-link>
+        </nav>
+        <router-view></router-view>
+        <!-- <book-app></book-app> -->
+        <footer>
+            Copyright &copy; 2019
+        </footer>
+    </div>
+
+
     <script src="lib/jquery/jquery.js"></script>
     <script src="lib/bootstrap/bootstrap.js"></script>
     <script src="lib/axios/axios.js"></script>
