@@ -1,7 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 footer {
     position: fixed;
     bottom: 0;
     right: 0;
     /* width: 100%; */
     /* font-weight: bold; */
+}
+
+body {
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+}
+li {
+    text-decoration-style: none;
+}
+a {
+    all: unset;
+}
+a {
+    text-decoration: none;
+}
+
+a:hover 
+{
+     text-decoration:none; 
+     cursor:pointer;  
 }

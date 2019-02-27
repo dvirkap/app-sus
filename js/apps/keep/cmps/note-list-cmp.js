@@ -4,8 +4,8 @@ import notePreview from './note-preview-cmp.js';
 export default {
     template: `
     <section>
-          <ul>
-    <li 
+          <ul class="keep-list-container ">
+    <li
         v-for="(currNote, idx) in notes" 
         :key="currNote.id"
     >
