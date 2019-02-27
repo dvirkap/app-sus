@@ -1,14 +1,15 @@
-// import bookService from '../services/book-service.js';
-// import bookList from '../cmps/book-list-cmp.js';
-// import bookDetails from '../cmps/book-details-cmp.js'
-// import bookFilter from '../cmps/book-filter-cmp.js';
-// import bookAdd from '../pages/book-add-cmp.js';
+import noteService from '../services/note-service.js';
+import noteList from '../cmps/note-list-cmp.js';
+import noteDetails from '../cmps/note-details-cmp.js'
+import noteFilter from '../cmps/note-filter-cmp.js';
+import noteAdd from '../cmps/note-add-cmp.js';
 
 export default {
     template: `
         <section class="book-app">
             <h1>Keep App</h1>
-            <!--<book-add></book-add>-->
+            <note-add></note-add>
+            
             <!--<book-filter v-on:filtered="setFilter"></book-filter>-->
             <!--<book-list v-bind:books="booksToShow"></book-list>-->
             <!--<book-details v-bind:book="selectedBook"></book-details>-->
@@ -55,9 +56,10 @@ export default {
 
     },
     components: {
-        // bookList,
-        // bookDetails,
-        // bookFilter,
-        // bookAdd
+        noteService,
+        noteList,
+        noteDetails,
+        noteFilter,
+        noteAdd
     }
 }
