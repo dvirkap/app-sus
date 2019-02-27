@@ -1,6 +1,6 @@
 export default {
 template: `
-<h1>Added note</h1>
+<h6>Add note</h6>
 `,
 
 }

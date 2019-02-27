@@ -1,6 +1,10 @@
+// import noteList from  ''
+
+
 export default {
+    props:['note'],
     template: `
-    <h1>Note preview card</h1>
+        <h3>{{note.title}}</h3>
     `,
     
     }

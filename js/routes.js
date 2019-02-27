@@ -2,6 +2,7 @@ import homeCmp from './apps/pages/home-cmp.js';
 import aboutCmp from './apps/pages/about-cmp.js';
 import emailApp from './apps/email/pages/email-app-cmp.js';
 import keepApp from './apps/keep/pages/keep-app-cmp.js';
+import noteDetails from './apps/keep/cmps/note-details-cmp.js';
 // import bookDetails from './cmps/book-details-cmp.js';
 
 const routes = [
@@ -9,6 +10,7 @@ const routes = [
     { path: '/about', component: aboutCmp },
     { path: '/email', component: emailApp },
     { path: '/keep', component: keepApp },
+    { path: '/keep/:noteId', component: noteDetails }
     // { path: '/addbook', component: booksAdd },
 
 ];

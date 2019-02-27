@@ -9,6 +9,7 @@ export default {
         <section class="book-app">
             <h1>Keep App</h1>
             <note-add></note-add>
+            <note-list :notes="notesToShow" @deleted="deleteNote"></note-list>
             
             <!--<book-filter v-on:filtered="setFilter"></book-filter>-->
             <!--<book-list v-bind:books="booksToShow"></book-list>-->
@@ -17,6 +18,7 @@ export default {
     `,
     data() {
         return {
+            notes: [],
             // books: [],
             // // selectedBook: null,
             // // filter: null,
@@ -27,11 +29,20 @@ export default {
             // }
         }
     },
+    
     created() {
+        // noteService.getNotes()
+        // .then(notes => this.notes = notes)
+        
+
         // bookService.getBooks()
         //     .then(books => this.books = books);
     },
     methods: {
+        deleteNote(){
+
+        }
+
         // setFilter(filterBy) {
         //     console.log('BoookApp Got Filter: ', filterBy);
         //     this.filterBy = filterBy;
@@ -43,6 +54,9 @@ export default {
         // },
     },
     computed: {
+        notesToShow(){
+
+        }
         // booksToShow() {
         //     if (!this.filterBy.title &&
         //         this.filterBy.fromPrice === 0 &&
