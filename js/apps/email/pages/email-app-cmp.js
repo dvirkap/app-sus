@@ -1,22 +1,28 @@
-// import bookService from '../services/book-service.js';
-// import bookList from '../cmps/book-list-cmp.js';
+import emailService from '../services/email-service.js';
+import emailList from '../cmps/email-list-cmp.js';
+import emailStatus from '../cmps/email-status-cmp.js';
+
 // import bookDetails from '../cmps/book-details-cmp.js'
 // import bookFilter from '../cmps/book-filter-cmp.js';
 // import bookAdd from '../pages/book-add-cmp.js';
 
 export default {
     template: `
-        <section class="book-app">
+        <section class="email-app email-wrapper">
+            <!--<router-link to="/about">Inbox</router-link>-->
             <h1>Email App</h1>
             <!--<book-add></book-add>-->
             <!--<book-filter v-on:filtered="setFilter"></book-filter>-->
-            <!--<book-list v-bind:books="booksToShow"></book-list>-->
+            
+            <email-status v-bind:emails="emailsToShow"></email-status>
+            <email-list v-bind:emails="emailsToShow"></email-list>
+
             <!--<book-details v-bind:book="selectedBook"></book-details>-->
         </section> 
     `,
     data() {
         return {
-            // books: [],
+            emails: [],
             // // selectedBook: null,
             // // filter: null,
             // filterBy: {
@@ -27,8 +33,8 @@ export default {
         }
     },
     created() {
-        // bookService.getBooks()
-        //     .then(books => this.books = books);
+        emailService.getEmails()
+            .then(emails => this.emails = emails);
     },
     methods: {
         // setFilter(filterBy) {
@@ -42,21 +48,26 @@ export default {
         // },
     },
     computed: {
-        // booksToShow() {
-        //     if (!this.filterBy.title &&
-        //         this.filterBy.fromPrice === 0 &&
-        //         this.filterBy.toPrice === Infinity) return this.books;
-        //     return this.books.filter(book => {
-        //         return book.title.includes(this.filterBy.title) &&
-        //             book.listPrice.amount > this.filterBy.fromPrice &&
-        //             book.listPrice.amount < this.filterBy.toPrice
-        //     })
-        // },
+        unreadEmails() {
+            var unReadEmails = this.emails.filter((email=> !email.isRead));
+            return unReadEmails.length;
+        },
+        emailsToShow() {
+            return this.emails;
+            // if (!this.filterBy.title &&
+            //     this.filterBy.fromPrice === 0 &&
+            //     this.filterBy.toPrice === Infinity) return this.books;
+            // return this.books.filter(book => {
+            //     return book.title.includes(this.filterBy.title) &&
+            //         book.listPrice.amount > this.filterBy.fromPrice &&
+            //         book.listPrice.amount < this.filterBy.toPrice
+            // })
+        },
 
     },
     components: {
-        // bookList,
-        // bookDetails,
+        emailList,
+        emailStatus,
         // bookFilter,
         // bookAdd
     }

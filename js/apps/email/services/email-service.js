@@ -1,4 +1,4 @@
-import storageService from './storage-service.js';
+import storageService from '../../services/storage-service.js';
 const EMAILS_KEY = 'emails';
 
 export default {
@@ -16,10 +16,11 @@ _createEmails();
 function _createEmails() {
     var emails = storageService.load(EMAILS_KEY);
     if (!emails || emails.length === 0) {
+        var body = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil laborum reiciendis a, unde sequi dolore fuga ipsam vitae at suscipit ea iste tempore cupiditate, earum iusto voluptas ipsa quo! Eaque.'
         var emails = [
-            _createEmail('subject 1', 'body 1', 1551133930594),
-            _createEmail('subject 2', 'body 2', 1551133930594),
-            _createEmail('subject 3', 'body 3', 1551133930594),
+            _createEmail('user1@gmail.com', 'nirfuchs@appsus.com', 'This is a test email 1', body, 1551267824290),
+            _createEmail('user2@gmail.com', 'nirfuchs@appsus.com', 'This is a test email 2', body, 1551133930594),
+            _createEmail('user3@gmail.com', 'nirfuchs@appsus.com', 'This is a test email 3', body, 1551133930594),
         ];
         storageService.store(EMAILS_KEY, emails);
     } else {
@@ -46,20 +47,24 @@ function addEmail(subject, body, sentAt) {
     return Promise.resolve(email);
 }
 
-function _createEmail(subject, body, sentAt) {
+function _createEmail(from, to, subject, body, sentAt) {
     var email = {
         id: gNextId++,
+        from: from,
+        to: to,
         subject: subject,
         body: body,
-        sentAt: sentAt
+        sentAt: sentAt,
+        isRead: false
     };
     return email;
 }
 
 function getEmailById(emailId) {
     var email = gEmails.find(function (email) {
-        return emailId === email.id
-    })
+        return emailId === email.id;
+    });
+
     return Promise.resolve(email);
 }
 
