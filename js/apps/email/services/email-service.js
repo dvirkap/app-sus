@@ -18,9 +18,9 @@ function _createEmails() {
     if (!emails || emails.length === 0) {
         var body = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil laborum reiciendis a, unde sequi dolore fuga ipsam vitae at suscipit ea iste tempore cupiditate, earum iusto voluptas ipsa quo! Eaque.'
         var emails = [
-            _createEmail('user1@gmail.com', 'nirfuchs@appsus.com', 'This is a test email 1', body, 1551267824290),
-            _createEmail('user2@gmail.com', 'nirfuchs@appsus.com', 'This is a test email 2', body, 1551133930594),
-            _createEmail('user3@gmail.com', 'nirfuchs@appsus.com', 'This is a test email 3', body, 1551133930594),
+            _createEmail('user1@gmail.com', 'nirfuchs@appsus.com', 'This is a test email 1', '1' + body, 1551267824290),
+            _createEmail('user2@gmail.com', 'nirfuchs@appsus.com', 'This is a test email 2', '2' + body, 1551133930594),
+            _createEmail('user3@gmail.com', 'nirfuchs@appsus.com', 'This is a test email 3', '3' + body, 1551133930594),
         ];
         storageService.store(EMAILS_KEY, emails);
     } else {

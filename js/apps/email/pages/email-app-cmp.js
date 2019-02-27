@@ -1,9 +1,8 @@
 import emailService from '../services/email-service.js';
 import emailList from '../cmps/email-list-cmp.js';
 import emailStatus from '../cmps/email-status-cmp.js';
-
+import emailFilter from '../cmps/email-filter-cmp.js';
 // import bookDetails from '../cmps/book-details-cmp.js'
-// import bookFilter from '../cmps/book-filter-cmp.js';
 // import bookAdd from '../pages/book-add-cmp.js';
 
 export default {
@@ -12,9 +11,9 @@ export default {
             <!--<router-link to="/about">Inbox</router-link>-->
             <h1>Email App</h1>
             <!--<book-add></book-add>-->
-            <!--<book-filter v-on:filtered="setFilter"></book-filter>-->
-            
-            <email-status v-bind:emails="emailsToShow"></email-status>
+
+            <email-filter v-on:filtered="setFilter"></email-filter>
+            <email-status v-bind:emails="emails"></email-status>
             <email-list v-bind:emails="emailsToShow"></email-list>
 
             <!--<book-details v-bind:book="selectedBook"></book-details>-->
@@ -25,11 +24,12 @@ export default {
             emails: [],
             // // selectedBook: null,
             // // filter: null,
-            // filterBy: {
-            //     title: '',
-            //     fromPrice: 0,
-            //     toPrice: Infinity
-            // }
+            filterBy: {
+                text: '',
+                type: ''
+                // fromPrice: 0,
+                // toPrice: Infinity
+            }
         }
     },
     created() {
@@ -37,6 +37,10 @@ export default {
             .then(emails => this.emails = emails);
     },
     methods: {
+        setFilter(filterBy) {
+            console.log('EmailApp Got Filter: ', filterBy);
+            this.filterBy = filterBy;
+        },
         // setFilter(filterBy) {
         //     console.log('BoookApp Got Filter: ', filterBy);
         //     this.filterBy = filterBy;
@@ -48,27 +52,31 @@ export default {
         // },
     },
     computed: {
-        unreadEmails() {
-            var unReadEmails = this.emails.filter((email=> !email.isRead));
-            return unReadEmails.length;
-        },
         emailsToShow() {
-            return this.emails;
-            // if (!this.filterBy.title &&
-            //     this.filterBy.fromPrice === 0 &&
-            //     this.filterBy.toPrice === Infinity) return this.books;
-            // return this.books.filter(book => {
-            //     return book.title.includes(this.filterBy.title) &&
-            //         book.listPrice.amount > this.filterBy.fromPrice &&
-            //         book.listPrice.amount < this.filterBy.toPrice
-            // })
-        },
+            var emailsByText = this.emails.filter(email => {
+                return email.subject.includes(this.filterBy.text) ||
+                    email.body.includes(this.filterBy.text);
+            });
+            var res = [];
+            if (this.filterBy.type === 'Read') {
+                return emailsByText.filter(email => email.isRead);
+            }
+            if (this.filterBy.type === 'Unread') {
+                return emailsByText.filter(email => !email.isRead);
+            }
+            return emailsByText;
 
+            // if (!this.filterBy.text &&
+            //     (this.filterBy.type === 'All' || is.filterBy.type === '')) {
+            //     return this.emails;
+            // }
+
+        },
     },
     components: {
         emailList,
         emailStatus,
-        // bookFilter,
+        emailFilter,
         // bookAdd
     }
 }
