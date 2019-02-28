@@ -13,10 +13,16 @@ const routes = [
     { path: '/about', component: aboutCmp },
     { path: '/email', component: emailApp },
     { path: '/email/:emailId', component: emailDetails },
-    { path: '/keep', component: keepApp,
-    children: [{ path: 'noteadd', component: noteAdd }]
-    },
-    { path: '/keep/:noteId', component: noteDetails },
+    { path: '/keep', component: keepApp},
+    // children: [{ path: 'noteadd', component: noteAdd },
+    { path: '/keep/noteadd', components:{
+        newNoteRouter: noteAdd
+    }  },
+        { path: '/keep/:noteId', components:{
+            editNoteRouter: noteDetails
+        }  },
+    // ]},
+    // ,
     // { path: '/addbook', component: booksAdd },
 
 ];

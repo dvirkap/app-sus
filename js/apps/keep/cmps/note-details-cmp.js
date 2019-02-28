@@ -3,8 +3,8 @@ import noteService from '../services/note-service.js';
 export default {
     template: `
     <section v-if="note">
-        <h2 class="keep-details-title" @click="editNote" v-bind:class="{ 'keep-hidden': isActive }">{{note.title}} </h2>
-        <input type="text"  v-bind:class="{ alert: isTitleActive }" @input="addNewNote()" v-model="myTitle" placeholder="title">
+        <div class="keep-title-input" @click="editTitle" v-bind:class="{ 'keep-hidden': !isTitleInEditMode }">{{note.title}}</div>
+        <input type="text" class="keep-title-input" v-model="myTitle" v-bind:class="{ 'keep-hidden': isTitleInEditMode }" @input="addNewNote()" placeholder="title">
         <div class="keep-details-txt">{{note.txt}}</div>
         <button @click="$router.push('/keep')" >back</button>
     </section>
@@ -14,15 +14,18 @@ export default {
         return {
             note: null,
             isActive: false,
+            myTitle: null,
+            isTitleInEditMode: true,
             
         }
     },
 
     methods: {
-        editNote() {
+        editTitle() {
             if (this.note) {
-                var title = this.note.title;
-                console.log(title);
+                this.myTitle = this.note.title;
+                this.isTitleInEditMode = false;
+                // console.log(title);
             }
         }
     },

@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 .keep-list-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-gap: 15px;
+}
+.keep-edit-note-container {
+    grid-row: span 2;
+    /* height: 500px; */
 }
 .keep-add-note-container {
     grid-row: span 2;
@@ -71,10 +76,15 @@
   }
   
 .keep-hidden {
-    visibility: hidden;
+    display: none;
 }
 
 .keep-new-note-img {
     width: 80%;
     height: auto;
+}
+.keep-title-input {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
 }

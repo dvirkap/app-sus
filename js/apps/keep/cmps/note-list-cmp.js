@@ -9,9 +9,11 @@ export default {
     <ul class="keep-list-container ">
         <li  class="shadow-drop-2-center " :class="{'keep-add-note-container' : isAddNewNoteButtonVisibile}" :style="{backgroundColor: colorVal}" v-on:bgcolor="newcolor" >
             <div id="newNote"  ref="note" :class="{'keep-hidden' : isRouterViewHidden}" >
-                    <router-view></router-view>
+                <router-view name="newNoteRouter"></router-view>
+                <!-- <router-view></router-view> -->
             </div>
             <div :class="{'keep-hidden' : isAddNewNoteButtonVisibile}"  @click="addNewNote" >
+                <router-view name="editNoteRouter"></router-view>
                     <router-link to="/keep/noteadd">
                          <div class="keep-preview-title">Click to add Note</div>
                         <div class="keep-preview-txt">+</div>
@@ -19,7 +21,8 @@ export default {
                     </div>
         </li>
 
-        <li v-for="(currNote, idx) in notes" :key="currNote.id">
+        <li v-for="(currNote, idx) in notes" :key="currNote.id" @click="editNote" :class="{'keep-edit-note-container' : isEditNoteVisible}" >
+
             <router-link :to="'/keep/' + currNote.id">
                 <note-preview :note="currNote" :idx="idx+1"></note-preview>
             </router-link>
@@ -35,13 +38,16 @@ export default {
             isAddNewNoteButtonVisibile: false,
             isAddNoteActivated: true,
             colorVal:  null,
+            isEditNoteVisible: true,
 
 
 
         }
     },
     methods: {
-
+        editNote() {
+            this.isEditNoteVisible = true;
+        },
         
             
 //             var el = document.getElementById("outside");
