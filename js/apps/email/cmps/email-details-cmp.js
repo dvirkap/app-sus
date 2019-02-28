@@ -4,7 +4,7 @@ import emailService from '../services/email-service.js';
 export default {
     // props: ['book'],
     template: `
-        <section v-if="email" class="email-details flex email-wrapper">
+        <section v-if="email" class="email-details email-wrapper">
             <h4>{{email.subject}}</h4>
             <h6>From: {{email.from}}</h6>
             <h6>To: {{email.to}}</h6>

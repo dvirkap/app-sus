@@ -5,13 +5,13 @@ export default {
     template: `
         <section>
             <h5>Email List</h5>
-            <div class="email-list flex" v-for="(currEmail, idx) in emails" :key="currEmail.id">
-                <router-link  :to="'/email/' + currEmail.id">
+            <div class="email-list flex" >
+                <router-link class="flex" v-for="(currEmail, idx) in emails" :key="currEmail.id":to="'/email/' + currEmail.id">
                     <email-preview v-bind:email="currEmail">
                     </email-preview>
+                    <button v-on:click.stop.prevent="deleteEmail(currEmail)">Delete</button>
+                    <button v-on:click.stop.prevent="toggleIsRead(currEmail)">Read\\Unread</button>
                 </router-link>
-                <button v-on:click="deleteEmail(currEmail)">Delete</button>
-                <button v-on:click="toggleIsRead(currEmail)">Read\\Unread</button>
             </div>
             
             <!--<div class="email-list flex">
