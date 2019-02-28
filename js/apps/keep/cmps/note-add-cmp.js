@@ -59,44 +59,20 @@ data() {
         },
         addNewNote() {
             if (this.myText) {
-                // var str = 
-                // var result = regExp(str, '(?<=http).+?(?=jpg)', 'match')
-                
-                
                 if(this.myText.includes('jpeg') || this.myText.includes('png') || this.myText.includes('gif') || this.myText.includes('jpeg')) {
                     this.noteType = 'image'
                     var result = null;
                     var regExp = /\bhttp.*/;
-                    // if (this.myText.includes('jpeg')) {
-                    //     // var regExp = /\http.+?\jpg/;
-                    //     var regExp = /\bhttp.*/;
-                        
-                        result = regExp.exec(this.myText);
-                    //     console.log(this.myText.replace(regExp, 'Image embeded'));
-                    // }
-                    // if (this.myText.includes('png')) {
-                    //     var regExp = /\http.+?\png/;
-                    //     result = regExp.exec(this.myText);
-                    // }
-                    // if (this.myText.includes('gif')) {
-                    //     var regExp = /\http.+?\gif/;
-                    //     result = regExp.exec(this.myText);
-                        
-                    // }
-                    
+                        result = regExp.exec(this.myText);                    
                     var tempStr = this.myText.replace(regExp, '')
                     this.myText = tempStr
                     var imageurl = result
                     this.imageurl = imageurl;
-                    console.log('restul:', result);
-                    
-                    
                 }
 
                 if(this.myText.includes('youtu')) { 
                     var regExp = /\b((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
                     var result = regExp.exec(this.myText);
-                    console.log(result[0]);
                     var tempStr = this.myText.replace(regExp, '')
                     this.myText = tempStr
                     var currVideoUrl = result[0]
@@ -104,8 +80,6 @@ data() {
                     this.videourl = currVideoUrl;
                     result = regExp.exec(currVideoUrl);
                     this.videourl = result[0].substring(1)
-                    console.log(this.videourl);
-                    
                 }
                 
             }
