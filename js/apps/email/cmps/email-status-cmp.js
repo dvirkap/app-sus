@@ -10,7 +10,7 @@ export default {
     },
     computed: {
         unreadEmails() {
-            var unReadEmails = this.emails.filter((email => !email.isRead));
+            var unReadEmails = this.emails.filter((email => !email.isRead && email.to === 'nirfuchs@appsus.com'));
             return unReadEmails.length;
         }
     }

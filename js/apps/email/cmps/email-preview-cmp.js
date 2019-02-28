@@ -2,7 +2,7 @@ export default {
     props: ['email'],
     template: `
         <div class="email-item flex">
-            <h6 v-bind:class="classObject">{{email.subject}}</h6>
+            <h6 v-bind:class="classObject">{{email.from }} {{email.subject}}</h6>
         </div>
     `,
     methods: {

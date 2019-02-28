@@ -11,6 +11,7 @@ export default {
             <h4>{{email.subject}}</h4>
             <h6>From: {{email.from}}</h6>
             <h6>To: {{email.to}}</h6>
+            <h6>Cc: {{email.cc}}</h6>
             <h6>Sent at: {{fornatedDate}}</h6>
             <hr>
             <p>{{email.body}}</p>

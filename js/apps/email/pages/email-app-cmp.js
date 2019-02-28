@@ -12,14 +12,13 @@ export default {
         <section class="email-app email-wrapper">
             <!--<router-link to="/about">Inbox</router-link>-->
             <h1>Email App</h1>
-            <!--<book-add></book-add>-->
             <button v-on:click="onComposeClicked">Compose</button>
+            <button v-on:click="onInboxClicked">Inbox</button>
+            <button v-on:click="onSentClicked">Sent</button>
             <email-compose v-show="isCompose" v-on:close="onCloseCompose" v-on:send="onSendEmail"></email-compose>
             <email-filter v-on:filtered="setFilter"></email-filter>
             <email-status v-bind:emails="emails"></email-status>
             <email-list v-bind:emails="emailsToShow"></email-list>
-
-            <!--<book-details v-bind:book="selectedBook"></book-details>-->
         </section> 
     `,
     data() {
@@ -29,40 +28,61 @@ export default {
                 text: '',
                 type: ''
             },
-            isCompose: false
+            isCompose: false,
+            isInbox: true
         }
     },
     methods: {
         onComposeClicked() {
-            console.log('Compose new email');
+            // console.log('Compose new email');
             this.isCompose = true;
         },
         onCloseCompose() {
             this.isCompose = false;
         },
-        onSendEmail() {
-            this.isCompose = false;
-            console.log('Sending Email');
+        onSendEmail(emailObj) {
+            // console.log(emailObj);
+            emailService.addEmail(emailObj)
+                .then(() => {
+                    console.log('Email was sent');
+                    this.isCompose = false;
+                    // this.$router.push('/email');
+                });
         },
         setFilter(filterBy) {
-            console.log('EmailApp Got Filter: ', filterBy);
+            // console.log('EmailApp Got Filter: ', filterBy);
             this.filterBy = filterBy;
         },
+        onInboxClicked() {
+            this.isInbox = true;
+        },
+        onSentClicked() {
+            this.isInbox = false;
+        }
     },
     computed: {
         emailsToShow() {
-            var emailsByText = this.emails.filter(email => {
+            // filter by text in subject and body
+            var emailList = this.emails.filter(email => {
                 return email.subject.includes(this.filterBy.text) ||
                     email.body.includes(this.filterBy.text);
             });
-            var res = [];
+            // filter by Read emails
             if (this.filterBy.type === 'Read') {
-                return emailsByText.filter(email => email.isRead);
+                emailList = emailList.filter(email => email.isRead);
             }
+            // filter by Unread emails
             if (this.filterBy.type === 'Unread') {
-                return emailsByText.filter(email => !email.isRead);
+                emailList = emailList.filter(email => !email.isRead);
             }
-            return emailsByText;
+
+            if (this.isInbox) { // filter by Inbox emails
+                emailList = emailList.filter(email => email.to === 'nirfuchs@appsus.com');
+            } else {// filter by Sent emails
+                emailList = emailList.filter(email => email.from === 'nirfuchs@appsus.com');
+            }
+
+            return emailList;
         },
     },
     created() {

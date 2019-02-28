@@ -8,6 +8,7 @@ export default {
                 <option value="Unread">Unread</option>
             </select>
             <button v-on:click="emitFilter">Filter</button>
+            <!-- <button v-on:click="clearFilter">Clear Filter</button> -->
         </section>
     `,
     data() {
@@ -20,8 +21,13 @@ export default {
     },
     methods: {
         emitFilter() {
-            console.log('Emitting to Parent');
-            this.$emit('filtered', { ...this.filterBy })
+            // console.log('Emitting to Parent');
+            this.$emit('filtered', { ...this.filterBy });
+        },
+        clearFilter() {
+            this.filterBy.text = '';
+            this.filterBy.type = 'All';
+            this.$emit('filtered', { ...this.filterBy });
         }
     }
 }

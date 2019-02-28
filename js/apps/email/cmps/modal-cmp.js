@@ -5,7 +5,7 @@ export default {
         <div class="modal-mask">
             <div class="modal-wrapper">
                 <div class="modal-container">
-                    <button class="modal-default-button" v-on:click="emitClose">x</button>
+                    <!--<button class="modal-default-button" v-on:click="emitClose">x</button>-->
                     <div class="modal-header">
                         <slot name="header">
                         </slot>
@@ -16,8 +16,8 @@ export default {
                     </div>
                     <div class="modal-footer">
                         <slot name="footer">
-                            <button class="modal-default-button" v-on:click="emitClose">Close</button>
-                            <button class="modal-default-button" v-on:click="emitSend">Send</button>
+                            <!-- <button class="modal-default-button" v-on:click="emitClose">Close</button> -->
+                            <!-- <button class="modal-default-button" v-on:click="emitSend">Send</button> -->
                         </slot>
                     </div>
                 </div>
