@@ -73,3 +73,8 @@
 .keep-hidden {
     visibility: hidden;
 }
+
+.keep-new-note-img {
+    width: 80%;
+    height: auto;
+}
