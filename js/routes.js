@@ -7,6 +7,7 @@ import noteAdd from './apps/keep/cmps/note-add-cmp.js';
 // import bookDetails from './cmps/book-details-cmp.js';
 import emailDetails from './apps/email/cmps/email-details-cmp.js';
 
+
 const routes = [
     { path: '/', component: homeCmp },
     { path: '/about', component: aboutCmp },

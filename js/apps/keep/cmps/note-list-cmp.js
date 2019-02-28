@@ -7,11 +7,11 @@ export default {
         <!-- <h2>User {{ $route.params.id }}</h2> -->
         
     <ul class="keep-list-container ">
-        <li class="shadow-drop-2-center " :class="{'keep-add-note-container' : isAddNewNoteButtonVisibile}">
+        <li class="shadow-drop-2-center " :class="{'keep-add-note-container' : isAddNewNoteButtonVisibile}" :style="{backgroundColor: colorVal}" v-on:bgcolor="newcolor">
             <div :class="{'keep-hidden' : isRouterViewHidden}" >
                     <router-view></router-view>
             </div>
-            <div :class="{'keep-hidden' : isAddNewNoteButtonVisibile}"  @click="addNewNote">
+            <div :class="{'keep-hidden' : isAddNewNoteButtonVisibile}"  @click="addNewNote" >
                     <router-link to="/keep/noteadd">
                          <div class="keep-preview-title">Click to add Note</div>
                         <div class="keep-preview-txt">+</div>
@@ -34,21 +34,32 @@ export default {
             isRouterViewHidden: true,
             isAddNewNoteButtonVisibile: false,
             isAddNoteActivated: true,
+            colorVal:  null,
 
 
 
         }
     },
     methods: {
+        newcolor(newBgColor) {
+            this.colorVal = newBgColor;
+            console.log('this.colorVal',this.colorVal )
+        },
         addNewNote() {
             this.isRouterViewHidden = false;
             this.isAddNewNoteButtonVisibile = true;
-        }
+        },
+        
     },
 
     created() {
         noteService.getNotes()
             .then(notes => this.notes = notes)
+    },
+
+    computed: {
+
+        
     },
     components: {
         notePreview
