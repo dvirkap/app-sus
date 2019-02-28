@@ -5,10 +5,12 @@ export default {
     template: `
         <section>
             <h5>Email List</h5>
-            <div class="email-list flex">
-                <router-link v-for="(currEmail, idx) in emails" :key="currEmail.id" :to="'/email/' + currEmail.id">
+            <div class="email-list flex" >
+                <router-link class="flex" v-for="(currEmail, idx) in emails" :key="currEmail.id":to="'/email/' + currEmail.id">
                     <email-preview v-bind:email="currEmail">
                     </email-preview>
+                    <button v-on:click.stop.prevent="deleteEmail(currEmail)">Delete</button>
+                    <button v-on:click.stop.prevent="toggleIsRead(currEmail)">Read\\Unread</button>
                 </router-link>
             </div>
             
@@ -18,12 +20,22 @@ export default {
             </div>-->
         </section>
     `,
+    data() {
+        return {
+
+        }
+    },
     methods: {
-        // selectEmail(email) {
-        //     console.log(email);
-        //     console.log(email.id);
-        //     this.$emit('selected', email.id);
-        // }
+        deleteEmail(email) {
+            this.$emit('delete', email.id);
+        },
+
+        toggleIsRead(email) {
+            email.isRead = !email.isRead;
+        }
+    },
+    computed: {
+
     },
 
     components: {

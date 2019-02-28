@@ -11,3 +11,11 @@
 .font-normal {
     font-weight: normal;
 }
+
+.flex {
+    display: flex;
+}
+
+.email-list {
+    flex-direction: column;
+}
