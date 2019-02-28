@@ -36,7 +36,6 @@ export default {
     `,
     data() {
         return {
-            // isShowModal: false
             email: {
                 from: 'nirfuchs@appsus.com',
                 to: '',
@@ -48,9 +47,7 @@ export default {
     },
     methods: {
         onCloseModal() {
-            // console.log('onCloseModal');
             this.$emit('close');
-            // this.isShowModal = false;
             this.$router.push('/email');
         },
         onSendEmail() {
@@ -74,7 +71,7 @@ export default {
         }
     },
     created() {
-        // this.isShowModal = true;
+
     },
     components: {
         modal,

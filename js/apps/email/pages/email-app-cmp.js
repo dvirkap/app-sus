@@ -12,14 +12,11 @@ export default {
         <section class="email-app email-wrapper">
             <!--<router-link to="/about">Inbox</router-link>-->
             <h1>Email App</h1>
-            <!--<book-add></book-add>-->
             <button v-on:click="onComposeClicked">Compose</button>
             <email-compose v-show="isCompose" v-on:close="onCloseCompose" v-on:send="onSendEmail"></email-compose>
             <email-filter v-on:filtered="setFilter"></email-filter>
             <email-status v-bind:emails="emails"></email-status>
             <email-list v-bind:emails="emailsToShow"></email-list>
-
-            <!--<book-details v-bind:book="selectedBook"></book-details>-->
         </section> 
     `,
     data() {
@@ -41,7 +38,7 @@ export default {
             this.isCompose = false;
         },
         onSendEmail(emailObj) {
-            console.log(emailObj);
+            // console.log(emailObj);
             emailService.addEmail(emailObj)
                 .then(() => {
                     console.log('Email was sent');
@@ -50,7 +47,7 @@ export default {
                 });
         },
         setFilter(filterBy) {
-            console.log('EmailApp Got Filter: ', filterBy);
+            // console.log('EmailApp Got Filter: ', filterBy);
             this.filterBy = filterBy;
         },
     },
