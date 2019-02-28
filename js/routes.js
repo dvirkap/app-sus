@@ -6,23 +6,20 @@ import noteDetails from './apps/keep/cmps/note-details-cmp.js';
 import noteAdd from './apps/keep/cmps/note-add-cmp.js';
 // import bookDetails from './cmps/book-details-cmp.js';
 import emailDetails from './apps/email/cmps/email-details-cmp.js';
+import emailCompose from './apps/email/cmps/email-compose-cmp.js'
 
 
 const routes = [
     { path: '/', component: homeCmp },
     { path: '/about', component: aboutCmp },
     { path: '/email', component: emailApp },
+    { path: '/email/compose', component: emailCompose },
     { path: '/email/:emailId', component: emailDetails },
-    { path: '/keep', component: keepApp},
-    // children: [{ path: 'noteadd', component: noteAdd },
-    { path: '/keep/noteadd', components:{
-        newNoteRouter: noteAdd
-    }  },
-        { path: '/keep/:noteId', components:{
-            editNoteRouter: noteDetails
-        }  },
-    // ]},
-    // ,
+    {
+        path: '/keep', component: keepApp, children:
+            [{ path: 'noteadd', component: noteAdd }]
+    },
+    { path: '/keep/:noteId', component: noteDetails },
     // { path: '/addbook', component: booksAdd },
 
 ];
