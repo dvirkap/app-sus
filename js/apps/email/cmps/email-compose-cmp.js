@@ -1,37 +1,28 @@
 import modal from './modal-cmp.js';
 import utilsService from '../../services/utils-service.js';
+import emailService from '../services/email-service.js';
 
 export default {
     template: `
-        <section class="email-compose">
-            <modal>
-                <table slot="header" width="100%" border="1">
-                    <tr>
-                        <th colspan="2"><h3>New Message</h3></th> 
-                    </tr>
-                    <tbody>
-                        <tr>
-                            <td><h6>To:</h6></td>
-                            <td><input type="text" v-model="email.to"></td>
-                        </tr>
-                        <tr>
-                            <td><h6>Cc:</h6></td>
-                            <td><input type="text" v-model="email.cc"></td>
-                        </tr>
-                        <!-- <tr>
-                            <td><h6>Bcc:</h6></td>
-                            <td><input type="text"></td>
-                        </tr> -->
-                        <tr>
-                            <td><h6>Subject:</h6></td>
-                            <td><input type="text" v-model="email.subject"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <textarea slot="body" rows="4" cols="40" v-model="email.body"></textarea>
-                <button slot="footer" class="modal-default-button" v-on:click="onCloseModal">Close</button>
-                <button slot="footer" class="modal-default-button" v-on:click="onSendEmail" :disabled="isDisabled">Send</button>
-            </modal>
+        <section class="email-compose email-wrapper flex">
+            <h4>New Message</h4>
+            <div class="flex">
+                <label class="email-compose-label">To:</label>
+                <input class="email-compose-text" type="text" v-model="email.to" >
+            </div>
+            <div class="flex">
+                <label class="email-compose-label">Cc:</label>
+                <input class="email-compose-text" type="text" v-model="email.cc" >
+            </div>
+            <div class="flex">
+                <label class="email-compose-label">Subject:</label>
+                <input class="email-compose-text" type="text" v-model="email.subject">
+            </div>
+            <textarea class="email-compose-textarea" rows="12" cols="40" v-model="email.body"></textarea>
+            <div class="email-compose-btn flex">
+                <button class="email-compose-close" v-on:click="onCloseModal">Close</button>
+                <button class="email-compose-send" v-on:click="onSendEmail" :disabled="isDisabled">Send</button>
+            </div>
         </section>
     `,
     data() {
@@ -47,13 +38,22 @@ export default {
     },
     methods: {
         onCloseModal() {
-            this.$emit('close');
+            // this.$emit('close');
             this.$router.push('/email');
         },
         onSendEmail() {
             this.email.sentAt = Date.now();
-            this.$emit('send', { ...this.email });
+            emailService.addEmail(this.email)
+                .then(() => {
+                    console.log('Email was sent');
+                    // this.isCompose = false;
+                    this.$router.push('/email');
+                });
         },
+        // onSendEmail() {
+        //     this.email.sentAt = Date.now();
+        //     this.$emit('send', { ...this.email });
+        // },
     },
     computed: {
         isDisabled() {
@@ -71,12 +71,12 @@ export default {
         }
     },
     created() {
-
+        console.log('email-compose was created');
     },
     components: {
         modal,
-        utilsService
-        // reviewAdd,
+        utilsService,
+        emailService
         // reviewDisplay
     }
 }
