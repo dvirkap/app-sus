@@ -8,7 +8,6 @@ export default {
     template: `
         <section class="book-app">
             <h1>Keep App</h1>
-            <note-add></note-add>
             <note-list :notes="notesToShow" @deleted="deleteNote"></note-list>
             
             <!--<book-filter v-on:filtered="setFilter"></book-filter>-->

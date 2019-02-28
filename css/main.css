@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+*{
+    box-sizing: border-box;
+}
+
 footer {
     position: fixed;
     bottom: 0;
@@ -15,6 +19,7 @@ body {
 
 ul {
     list-style-type: none;
+    padding: 0px;
 }
 li {
     text-decoration-style: none;
