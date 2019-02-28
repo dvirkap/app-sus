@@ -3,9 +3,9 @@ import noteService from '../services/note-service.js';
 export default {
     template: `
     <section v-if="note">
-    <h2 class="keep-details-title">{{note.title}}</h2>
-    <div class="keep-details-txt">{{note.txt}}</div>
-    <button @click="$router.push('/keep')" >back</button>
+        <h2 class="keep-details-title">{{note.title}}</h2>
+        <div class="keep-details-txt">{{note.txt}}</div>
+        <button @click="$router.push('/keep')" >back</button>
     </section>
     `,
 
