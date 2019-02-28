@@ -18,7 +18,7 @@ export default {
             <email-compose v-show="isCompose" v-on:close="onCloseCompose" v-on:send="onSendEmail"></email-compose>
             <email-filter v-on:filtered="setFilter"></email-filter>
             <email-status v-bind:emails="emails"></email-status>
-            <email-list v-bind:emails="emailsToShow"></email-list>
+            <email-list v-bind:emails="emailsToShow" v-on:delete="onDeleteEmail"></email-list>
         </section> 
     `,
     data() {
@@ -46,6 +46,14 @@ export default {
                 .then(() => {
                     console.log('Email was sent');
                     this.isCompose = false;
+                    // this.$router.push('/email');
+                });
+        },
+        onDeleteEmail(emailId) {
+            console.log(emailId);
+            emailService.deleteEmail(emailId)
+                .then(() => {
+                    console.log('Email was deleted');
                     // this.$router.push('/email');
                 });
         },
