@@ -7,8 +7,8 @@ export default {
         <!-- <h2>User {{ $route.params.id }}</h2> -->
         
     <ul class="keep-list-container ">
-        <li class="shadow-drop-2-center " :class="{'keep-add-note-container' : isAddNewNoteButtonVisibile}" :style="{backgroundColor: colorVal}" v-on:bgcolor="newcolor">
-            <div :class="{'keep-hidden' : isRouterViewHidden}" >
+        <li  class="shadow-drop-2-center " :class="{'keep-add-note-container' : isAddNewNoteButtonVisibile}" :style="{backgroundColor: colorVal}" v-on:bgcolor="newcolor" >
+            <div id="newNote"  ref="note" :class="{'keep-hidden' : isRouterViewHidden}" >
                     <router-view></router-view>
             </div>
             <div :class="{'keep-hidden' : isAddNewNoteButtonVisibile}"  @click="addNewNote" >
@@ -41,6 +41,11 @@ export default {
         }
     },
     methods: {
+
+        
+            
+//             var el = document.getElementById("outside");
+       
         newcolor(newBgColor) {
             this.colorVal = newBgColor;
             console.log('this.colorVal',this.colorVal )
@@ -52,10 +57,21 @@ export default {
         
     },
 
+
     created() {
         noteService.getNotes()
-            .then(notes => this.notes = notes)
+            .then(notes => this.notes = notes),
+
+            function() {
+                window.addEventListener('mousedown',this.listenToClick);
+            }
+            
     },
+    destroyed: function () {
+        window.removeEventListener('mousedown',this.listenToClick)
+        console.log(window.removeEventListener('mousedown',this.listenToClick));
+        
+      },
 
     computed: {
 
@@ -63,7 +79,16 @@ export default {
     },
     components: {
         notePreview
-    }
+    },
+
+    mounted() {
+        this.$nextTick(()=> {
+            console.log()
+          })
+          
+        },
+
+    
 
 
 }

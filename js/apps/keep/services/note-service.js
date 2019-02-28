@@ -3,7 +3,8 @@ import createNoteId from '../../services/utils-service.js'
 import storage from '../../services/storage-service.js'
 export default {
     getNotes,
-    getNotesById
+    getNotesById,
+    addNote
 }
 const NOTES_KEY = 'notes';
 var numberOfNotes = 10;
@@ -41,7 +42,15 @@ function createDummyNotes(number) {
 }
 
 
-
+function addNote(noteObj) {
+    var note = noteObj;
+    note.id = createNoteId.makeId(8);
+    console.log('new note.id:', note.id);
+    
+    gNotes.push(note);
+    storage.store(NOTES_KEY, gNotes);
+    return Promise.resolve(gNotes);
+}
 
 function saveToStorage() {
     storage.store(NOTES_KEY, gNotes)
