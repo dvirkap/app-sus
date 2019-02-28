@@ -50,7 +50,7 @@ export default {
                 });
         },
         onDeleteEmail(emailId) {
-            console.log(emailId);
+            // console.log(emailId);
             emailService.deleteEmail(emailId)
                 .then(() => {
                     console.log('Email was deleted');

@@ -33,6 +33,7 @@ export default {
         },
         onUnreadEmail() {
             this.email.isRead = false;
+            this.$router.push('/email');
         }
     },
     computed: {
