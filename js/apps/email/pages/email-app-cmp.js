@@ -34,15 +34,20 @@ export default {
     },
     methods: {
         onComposeClicked() {
-            console.log('Compose new email');
+            // console.log('Compose new email');
             this.isCompose = true;
         },
         onCloseCompose() {
             this.isCompose = false;
         },
-        onSendEmail() {
-            this.isCompose = false;
-            console.log('Sending Email');
+        onSendEmail(emailObj) {
+            console.log(emailObj);
+            emailService.addEmail(emailObj)
+                .then(() => {
+                    console.log('Email was sent');
+                    this.isCompose = false;
+                    // this.$router.push('/email');
+                });
         },
         setFilter(filterBy) {
             console.log('EmailApp Got Filter: ', filterBy);
@@ -55,7 +60,6 @@ export default {
                 return email.subject.includes(this.filterBy.text) ||
                     email.body.includes(this.filterBy.text);
             });
-            var res = [];
             if (this.filterBy.type === 'Read') {
                 return emailsByText.filter(email => email.isRead);
             }

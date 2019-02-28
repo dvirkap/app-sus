@@ -1,23 +1,49 @@
 import modal from './modal-cmp.js';
+import utilsService from '../../services/utils-service.js';
 
 export default {
     template: `
         <section class="email-compose">
-            <modal v-on:close="onCloseModal" v-on:send="onSendEmail">
-                <h3 slot="header">New Message</h3>
-                <h6 slot="header">To:</h6>
-                <h6 slot="header">Cc:</h6>
-                <h6 slot="header">Bcc:</h6>
-                <h6 slot="header">Subject:</h6>
-                <!--<long-text slot="body" v-bind:txt="book.description"></long-text>
-                <review-display slot="body" v-bind:reviews="book.reviews" v-on:delete="onDeleteReview"></review-display>
-                <review-add slot="body" v-on:reviewed="onSaveReview"></review-add>-->
+            <modal>
+                <table slot="header" width="100%" border="1">
+                    <tr>
+                        <th colspan="2"><h3>New Message</h3></th> 
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <td><h6>To:</h6></td>
+                            <td><input type="text" v-model="email.to"></td>
+                        </tr>
+                        <tr>
+                            <td><h6>Cc:</h6></td>
+                            <td><input type="text" v-model="email.cc"></td>
+                        </tr>
+                        <!-- <tr>
+                            <td><h6>Bcc:</h6></td>
+                            <td><input type="text"></td>
+                        </tr> -->
+                        <tr>
+                            <td><h6>Subject:</h6></td>
+                            <td><input type="text" v-model="email.subject"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <textarea slot="body" rows="4" cols="40" v-model="email.body"></textarea>
+                <button slot="footer" class="modal-default-button" v-on:click="onCloseModal">Close</button>
+                <button slot="footer" class="modal-default-button" v-on:click="onSendEmail" :disabled="isDisabled">Send</button>
             </modal>
         </section>
     `,
     data() {
         return {
             // isShowModal: false
+            email: {
+                from: 'nirfuchs@appsus.com',
+                to: '',
+                cc: '',
+                subject: '',
+                body: ''
+            },
         }
     },
     methods: {
@@ -28,15 +54,31 @@ export default {
             this.$router.push('/email');
         },
         onSendEmail() {
-            this.$emit('send');
+            this.email.sentAt = Date.now();
+            this.$emit('send', { ...this.email });
+        },
+    },
+    computed: {
+        isDisabled() {
+            var valid = false;
+            var to = utilsService.validateEmail(this.email.to);
+            var cc = true;
+            if (this.email.cc !== '') {
+                cc = utilsService.validateEmail(this.email.cc);
+            }
+            var subject = this.email.subject !== '';
+            var body = this.email.body !== '';
+
+            if (to && cc && subject && body) valid = true;
+            return !valid;
         }
     },
     created() {
         // this.isShowModal = true;
     },
     components: {
-        modal
-        // longText,
+        modal,
+        utilsService
         // reviewAdd,
         // reviewDisplay
     }

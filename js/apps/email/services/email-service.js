@@ -18,9 +18,30 @@ function _createEmails() {
     if (!emails || emails.length === 0) {
         var body = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil laborum reiciendis a, unde sequi dolore fuga ipsam vitae at suscipit ea iste tempore cupiditate, earum iusto voluptas ipsa quo! Eaque.'
         var emails = [
-            _createEmail('user1@gmail.com', 'nirfuchs@appsus.com', 'This is a test email 1', '1' + body, 1551267824290),
-            _createEmail('user2@gmail.com', 'nirfuchs@appsus.com', 'This is a test email 2', '2' + body, 1551133930594),
-            _createEmail('user3@gmail.com', 'nirfuchs@appsus.com', 'This is a test email 3', '3' + body, 1551133930594),
+            _createEmail({
+                from: 'user1@gmail.com',
+                to: 'nirfuchs@appsus.com',
+                cc: '',
+                subject: 'This is a test email 1',
+                body: '1' + body,
+                sentAt: 1551267824290
+            }),
+            _createEmail({
+                from: 'user2@gmail.com',
+                to: 'nirfuchs@appsus.com',
+                cc: '',
+                subject: 'This is a test email 2',
+                body: '2' + body,
+                sentAt: 1551133930594
+            }),
+            _createEmail({
+                from: 'user3@gmail.com',
+                to: 'nirfuchs@appsus.com',
+                cc: '',
+                subject: 'This is a test email 3',
+                body: '3' + body,
+                sentAt: 1551133930594
+            }),
         ];
         storageService.store(EMAILS_KEY, emails);
     } else {
@@ -40,21 +61,22 @@ function deleteEmail(emailId) {
     return Promise.resolve();
 }
 
-function addEmail(subject, body, sentAt) {
-    var email = _createEmail(subject, body, sentAt);
+function addEmail(emailObj) {
+    var email = _createEmail(emailObj);
     gEmails.push(email);
     storageService.store(EMAILS_KEY, gEmails);
     return Promise.resolve(email);
 }
 
-function _createEmail(from, to, subject, body, sentAt) {
+function _createEmail(emailObj) {
     var email = {
         id: gNextId++,
-        from: from,
-        to: to,
-        subject: subject,
-        body: body,
-        sentAt: sentAt,
+        from: emailObj.from,
+        to: emailObj.to,
+        cc: emailObj.cc,
+        subject: emailObj.subject,
+        body: emailObj.body,
+        sentAt: emailObj.sentAt,
         isRead: false
     };
     return email;
