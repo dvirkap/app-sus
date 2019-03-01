@@ -1,9 +1,8 @@
 export default {
     props: ['email'],
     template: `
-        <div class="email-preview">
-            <h6 v-bind:class="classObject">{{email.from }} {{email.subject}}</h6>
-        </div>
+        <!-- <div class="email-preview" v-bind:class="classObject">{{email.from }} {{email.subject}}</div> -->
+        <div class="email-preview" v-bind:class="classObject">{{email.subject}}</div>
     `,
     methods: {
     },

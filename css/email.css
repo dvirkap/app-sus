@@ -22,6 +22,7 @@
 
 .email-compose {
     flex-direction: column;
+    font-size: 0.9em;
 }
 
 .email-compose-label {
@@ -38,14 +39,93 @@
     margin: 2px;
 }
 
-.email-compose-close {
-    margin: 2px;
-}
-
-.email-compose-send {
-    margin: 2px;
+.email-compose-btn-container {
+    justify-content: flex-end;
 }
 
 .email-compose-btn {
+    margin: 2px;
+}
+
+.email-details {
+    flex-direction: column;
+    font-size: 0.9em;
+}
+
+.email-details-textarea {
+    /* border: none */
+    margin: 2px;
+}
+
+.email-details-btn-container {
     justify-content: flex-end;
+}
+
+.email-details-btn {
+    margin: 2px;
+}
+
+.email-details-link {
+    align-self: stretch;
+    background-color: red;
+}
+
+/* .checkboxes {
+    text-align: center;
+}
+
+.checkboxes input {
+    margin: 0px 0px 0px 0px;
+} */
+
+.email-app {
+    font-size: 0.9em;
+}
+
+.email-list {
+    /* font-size: 0.9em; */
+}
+
+input, button, select, optgroup, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.email-list table, th, td {
+    border-collapse: collapse;
+    border-right-style: none;
+    border-left-style: none;
+    width: 280px;
+    /* border:1px; */
+    /* border: 1px solid black; */
+}
+
+.email-list-td {
+    width: 280px;
+}
+
+@media (min-width: 750px) {
+    .email-app {
+        font-size: 1.2em;
+    }
+    .email-list {
+        /* font-size: 1.2em; */
+    }
+    .email-compose {
+        font-size: 1.2em;
+    }
+    .email-details {
+        font-size: 1.2em;
+    }
+    .email-list table, th, td {
+        border-collapse: collapse;
+        width: 500px;
+        /* border:1px; */
+        /* border: 1px solid black; */
+    }
+    .email-list-td {
+        width: 500px;
+    }
 }

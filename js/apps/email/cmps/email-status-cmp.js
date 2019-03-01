@@ -1,10 +1,7 @@
 export default {
     props: ['emails'],
     template: `
-        <div class="email-status">
-            <!--<h6 v-bind:class="classObject">{{email.subject}}</h6>-->
-            <h6>Status: {{unreadEmails}} Unread Emails</h6>
-        </div>
+        <div class="email-status">Status: {{unreadEmails}} Unread Emails</div>
     `,
     methods: {
     },

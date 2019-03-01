@@ -11,16 +11,19 @@ export default {
     template: `
         <section class="email-app email-wrapper">
             <!--<router-link to="/about">Inbox</router-link>-->
-            <h1>Email App</h1>
+            <h1 v-show="!isCompose">Appsus Email</h1>
             <!-- <button v-on:click="onComposeClicked">Compose</button> -->
-            <router-link to="/email/compose" v-on:click.native="onComposeClicked">Compose</router-link>
-            <button v-on:click="onInboxClicked">Inbox</button>
-            <button v-on:click="onSentClicked">Sent</button>
+            <!-- <router-link class="font-bold" to="/email/compose" v-on:click.native="onComposeClicked">Compose</router-link> -->
+            <a v-show="!isCompose" class="font-bold" v-on:click="onComposeClicked">Compose</a>
+            <a v-show="!isCompose" v-bind:class="classObjectInbox" v-on:click="onInboxClicked">Inbox</a>
+            <a v-show="!isCompose" v-bind:class="classObjectSent" v-on:click="onSentClicked">Sent</a>
+            <!-- <button v-on:click="onInboxClicked">Inbox</button> -->
+            <!-- <button v-on:click="onSentClicked">Sent</button> -->
             
-            <!-- <email-compose v-show="isCompose" v-on:close="onCloseCompose" v-on:send="onSendEmail"></email-compose> -->
-            <email-filter v-on:filtered="setFilter"></email-filter>
-            <email-status v-bind:emails="emails"></email-status>
-            <email-list v-bind:emails="emailsToShow" v-on:delete="onDeleteEmail"></email-list>
+            <email-compose v-if="isCompose" v-on:close="onCloseCompose" v-on:send="onSendEmail" :emailProp="email" :reply="false"></email-compose>
+            <email-filter v-show="!isCompose" v-on:filtered="setFilter"></email-filter>
+            <email-status v-show="!isCompose" v-bind:emails="emails"></email-status>
+            <email-list v-show="!isCompose" v-bind:emails="emailsToShow" v-on:delete="onDeleteEmail"></email-list>
             <!-- <router-view></router-view> -->
         </section> 
     `,
@@ -32,7 +35,14 @@ export default {
                 type: ''
             },
             isCompose: false,
-            isInbox: true
+            isInbox: true,
+            email: {
+                from: 'nirfuchs@appsus.com',
+                to: 'nirfuchs@appsus.com',
+                cc: '',
+                subject: '',
+                body: ''
+            },
         }
     },
     methods: {
@@ -75,8 +85,8 @@ export default {
         emailsToShow() {
             // filter by text in subject and body
             var emailList = this.emails.filter(email => {
-                return email.subject.includes(this.filterBy.text) ||
-                    email.body.includes(this.filterBy.text);
+                return email.subject.toLowerCase().includes(this.filterBy.text.toLowerCase()) ||
+                    email.body.toLowerCase().includes(this.filterBy.text.toLowerCase());
             });
             // filter by Read emails
             if (this.filterBy.type === 'Read') {
@@ -95,6 +105,18 @@ export default {
 
             return emailList;
         },
+        classObjectInbox() {
+            return {
+                'font-bold': this.isInbox,
+                'font-normal': !this.isInbox
+            }
+        },
+        classObjectSent(){
+            return {
+                'font-bold': !this.isInbox,
+                'font-normal': this.isInbox
+            }
+        }
     },
     created() {
         emailService.getEmails()
