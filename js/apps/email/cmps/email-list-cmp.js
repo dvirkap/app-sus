@@ -16,10 +16,11 @@ export default {
                                     </email-preview>
                                 </td>
                                 <td>
-                                    <button v-on:click.stop.prevent="onDeleteEmail(currEmail)">X</button>
+                                    <button class="email-list-btn-delete" v-on:click.stop.prevent="onDeleteEmail(currEmail)"></button>
                                 </td>
                                 <td>
-                                    <button v-on:click.stop.prevent="onToggleIsRead(currEmail)">U</button>
+                                    <button v-show="!currEmail.isRead" class="email-list-btn-unread" v-on:click.stop.prevent="onToggleIsRead(currEmail)"></button>
+                                    <button v-show="currEmail.isRead" class="email-list-btn-read" v-on:click.stop.prevent="onToggleIsRead(currEmail)"></button>
                                 </td>
                             </tr>
                         </router-link>
