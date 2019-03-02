@@ -2,10 +2,10 @@ import emailService from '../services/email-service.js';
 import emailList from '../cmps/email-list-cmp.js';
 import emailStatus from '../cmps/email-status-cmp.js';
 import emailFilter from '../cmps/email-filter-cmp.js';
+import emailSort from '../cmps/email-sort-cmp.js';
 import emailCompose from '../cmps/email-compose-cmp.js';
-
-// import bookDetails from '../cmps/book-details-cmp.js'
-// import bookAdd from '../pages/book-add-cmp.js';
+import userMsg from '../cmps/user-msg-cmp.js';
+import { eventBus, SEND_EMAIL } from '../../services/eventbus-service.js';
 
 export default {
     template: `
@@ -21,10 +21,14 @@ export default {
             <!-- <button v-on:click="onSentClicked">Sent</button> -->
             
             <email-compose v-if="isCompose" v-on:close="onCloseCompose" v-on:send="onSendEmail" :emailProp="email" :reply="false"></email-compose>
-            <email-filter v-show="!isCompose" v-on:filtered="setFilter"></email-filter>
+            <div class="flex">
+                <email-filter v-show="!isCompose" v-on:filtered="setFilter"></email-filter>
+                <email-sort v-show="!isCompose" v-bind:emails="emails"></email-sort>
+            </div>
             <email-status v-show="!isCompose" v-bind:emails="emails"></email-status>
             <email-list v-show="!isCompose" v-bind:emails="emailsToShow" v-on:delete="onDeleteEmail"></email-list>
             <!-- <router-view></router-view> -->
+            <!-- <user-msg></user-msg> -->
         </section> 
     `,
     data() {
@@ -55,11 +59,17 @@ export default {
         },
         onSendEmail(emailObj) {
             // console.log(emailObj);
+            // this.$router.push('/email');
             emailService.addEmail(emailObj)
                 .then(() => {
-                    console.log('Email was sent');
+                    // console.log('Email was sent');
+                    var message = { msg: 'Success! Email was sent', type: 'success' };
+                    eventBus.$emit(SEND_EMAIL, { ...message });
                     this.isCompose = false;
-                    // this.$router.push('/email');
+                }).catch((res) => {
+                    var message = { msg: 'Error! ' + res, type: 'error' };
+                    eventBus.$emit(SEND_EMAIL, { ...message });
+                    this.isCompose = false;
                 });
         },
         onDeleteEmail(emailId) {
@@ -103,7 +113,7 @@ export default {
                 emailList = emailList.filter(email => email.from === 'nirfuchs@appsus.com');
             }
 
-            return emailList;
+            return emailList.reverse();
         },
         classObjectInbox() {
             return {
@@ -111,7 +121,7 @@ export default {
                 'font-normal': !this.isInbox
             }
         },
-        classObjectSent(){
+        classObjectSent() {
             return {
                 'font-bold': !this.isInbox,
                 'font-normal': this.isInbox
@@ -126,6 +136,8 @@ export default {
         emailList,
         emailStatus,
         emailFilter,
-        emailCompose
+        emailSort,
+        emailCompose,
+        userMsg
     }
 }

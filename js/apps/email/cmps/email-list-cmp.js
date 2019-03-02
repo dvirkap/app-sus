@@ -4,7 +4,7 @@ export default {
     props: ['emails'],
     template: `
         <section>
-            <div>Email List</div>
+            <!-- <div>Email List</div> -->
             <div class="email-list">
                 <table border="1">
                     <tbody>

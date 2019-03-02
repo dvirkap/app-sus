@@ -10,5 +10,8 @@ export default {
             var unReadEmails = this.emails.filter((email => !email.isRead && email.to === 'nirfuchs@appsus.com'));
             return unReadEmails.length;
         }
+    },
+    created() {
+        // console.log(this.emails);
     }
 }

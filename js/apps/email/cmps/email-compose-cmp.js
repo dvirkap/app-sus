@@ -1,6 +1,7 @@
 import modal from './modal-cmp.js';
 import utilsService from '../../services/utils-service.js';
 import emailService from '../services/email-service.js';
+import userMsg from './user-msg-cmp.js';
 
 export default {
     props: ['emailProp', 'reply'],
@@ -24,6 +25,7 @@ export default {
                 <button class="email-compose-btn" v-on:click="onCloseCompose">Close</button>
                 <button class="email-compose-btn" v-on:click="onSendEmail" :disabled="isDisabled">Send</button>
             </div>
+            <!-- <user-msg></user-msg> -->
         </section>
     `,
     data() {
@@ -72,7 +74,7 @@ export default {
         },
     },
     created() {
-        console.log('email-compose was created');
+        // console.log('email-compose was created');
         // console.log(this.emailProp);
         // console.log(this.reply);
         if (this.reply) {
@@ -87,7 +89,7 @@ export default {
     components: {
         modal,
         utilsService,
-        emailService
-        // reviewDisplay
+        emailService,
+        userMsg
     }
 }

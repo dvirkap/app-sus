@@ -1,5 +1,7 @@
 import emailService from '../services/email-service.js';
 import emailCompose from '../cmps/email-compose-cmp.js';
+import userMsg from './user-msg-cmp.js';
+import { eventBus, SEND_EMAIL } from '../../services/eventbus-service.js';
 
 export default {
     // props: ['email'],
@@ -16,13 +18,13 @@ export default {
             <!-- <hr> -->
             <div v-show="!isReply" class="email-details-btn-container flex">
                 <!-- <router-link to="/email" class="email-details-link">Back to Inbox</router-link> -->
-                <button class="email-details-btn" v-on:click="onCloseEmail">close</button>
+                <button class="email-details-btn" v-on:click="onCloseEmail">Close</button>
                 <button class="email-details-btn" v-on:click="onReplyEmail">Reply</button>
                 <button class="email-details-btn" v-on:click="onUnreadEmail">Make unread</button>
                 <button class="email-details-btn" v-on:click="onDeleteEmail">Delete</button>
             </div>
             <email-compose v-if="isReply" v-on:close="onCloseReply" v-on:send="onSendReplyEmail" :emailProp="email" :reply="true"></email-compose>
-            
+            <!-- <user-msg></user-msg> -->
         </section>
     `,
     data() {
@@ -56,12 +58,17 @@ export default {
         },
         onSendReplyEmail(emailObj) {
             // console.log(emailObj);
-            this.email.sentAt = Date.now();
+            emailObj.sentAt = Date.now();
             emailService.addEmail(emailObj)
-                .then(() => {
-                    console.log('Reply Email was sent');
+                .then((res) => {
+                    // console.log('Reply Email was sent');
+                    var message = { msg: 'Success! Reply Email was sent', type: 'success' };
+                    eventBus.$emit(SEND_EMAIL, { ...message });
                     this.isReply = false;
                     this.$router.push('/email');
+                }).catch((res) => {
+                    var message = { msg: 'Error! ' + res, type: 'error' };
+                    eventBus.$emit(SEND_EMAIL, { ...message });
                 });
         }
     },
@@ -91,6 +98,7 @@ export default {
     },
 
     components: {
-        emailCompose
+        emailCompose,
+        userMsg
     }
 }

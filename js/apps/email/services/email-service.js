@@ -24,7 +24,7 @@ function _createEmails() {
                 cc: '',
                 subject: 'This is a test email 1',
                 body: '1' + body,
-                sentAt: 1551267824290
+                sentAt: 1551133930590
             }),
             _createEmail({
                 from: 'user2@gmail.com',
@@ -40,7 +40,7 @@ function _createEmails() {
                 cc: '',
                 subject: 'This is a test email 3',
                 body: '3' + body,
-                sentAt: 1551133930594
+                sentAt: 1551267824290
             }),
         ];
         storageService.store(EMAILS_KEY, emails);
