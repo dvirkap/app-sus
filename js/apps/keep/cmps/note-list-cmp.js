@@ -9,18 +9,17 @@ export default {
     <ul class="keep-list-container ">
         <li  class="shadow-drop-2-center " :class="{'keep-add-note-container' : isAddNewNoteButtonVisibile}" :style="{backgroundColor: colorVal}" v-on:bgcolor="newcolor" >
             <div id="newNote"  ref="note" :class="{'keep-hidden' : isRouterViewHidden}" >
-                <router-view name="newNoteRouter"></router-view>
-                <!-- <router-view></router-view> -->
-            </div>
-            <div :class="{'keep-hidden' : isAddNewNoteButtonVisibile}"  @click="addNewNote" >
-                <router-view name="editNoteRouter"></router-view>
+                    <router-view name="newnote"></router-view>
+                </div>
+                <div :class="{'keep-hidden' : isAddNewNoteButtonVisibile}"  @click="addNewNote" >
                     <router-link to="/keep/noteadd">
-                         <div class="keep-preview-title">Click to add Note</div>
-                        <div class="keep-preview-txt">+</div>
-                    </router-link>
-                    </div>
+                    <div class="keep-preview-title">Click to add Note</div>
+                    <div class="keep-preview-txt">+</div>
+                </router-link>
+            </div>
         </li>
-
+        
+        <router-view name="editnote"></router-view>
         <li v-for="(currNote, idx) in notes" :key="currNote.id" @click="editNote" :class="{'keep-edit-note-container' : isEditNoteVisible}" >
 
             <router-link :to="'/keep/' + currNote.id">
@@ -38,7 +37,7 @@ export default {
             isAddNewNoteButtonVisibile: false,
             isAddNoteActivated: true,
             colorVal:  null,
-            isEditNoteVisible: true,
+            isEditNoteVisible: false,
 
 
 
@@ -47,9 +46,11 @@ export default {
     methods: {
         editNote() {
             this.isEditNoteVisible = true;
+            // debugger;
+            // router.push({ name: 'editnote'})
         },
         
-            
+        // params: { userId: 123 }
 //             var el = document.getElementById("outside");
        
         newcolor(newBgColor) {

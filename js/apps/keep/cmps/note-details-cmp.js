@@ -6,7 +6,8 @@ export default {
         <div class="keep-title-input" @click="editTitle" v-bind:class="{ 'keep-hidden': !isTitleInEditMode }">{{note.title}}</div>
         <input type="text" class="keep-title-input" v-model="myTitle" v-bind:class="{ 'keep-hidden': isTitleInEditMode }" @input="addNewNote()" placeholder="title">
         <div class="keep-details-txt">{{note.txt}}</div>
-        <button @click="$router.push('/keep')" >back</button>
+        <button @click="$router.push('/keep')" >Save</button>
+        <div>{{ $route.params}}    </div>
     </section>
     `,
 
