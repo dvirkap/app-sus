@@ -47,9 +47,9 @@ export default {
         onToggleIsRead(email) {
             email.isRead = !email.isRead;
         },
-        checkboxClicked() {
-            console.log('checkboxClicked');
-        }
+        // checkboxClicked() {
+        //     console.log('checkboxClicked');
+        // }
     },
     computed: {
 

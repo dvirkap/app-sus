@@ -78,8 +78,44 @@
     margin: 0px 0px 0px 0px;
 } */
 
-.email-app {
+.email-app-container {
     font-size: 0.9rem;
+    flex-direction: column;
+    height: 100vh;
+    /* background-color: yellow; */
+}
+
+.email-app-header {
+    height: 3em;
+    background-color: #0079D4;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.email-app-content-container {
+    /* flex-direction: row-reverse; */
+    flex: 1;
+    /* width: 100%; */
+    /* background-color: blue; */
+}
+
+.email-app-nav {
+    flex-direction: column;
+    flex: 1;
+    background-color: #F5F5F5;
+}
+
+.email-app-main {
+    flex-basis: 80%;
+    background-color: #FFFFFF;
+}
+
+.email-app-nav-item {
+    margin: 10px 20px 10px 20px
+}
+
+email-app-header-item {
+    margin: 50px;
 }
 
 .email-list {
@@ -156,7 +192,7 @@ input, button, select, optgroup, textarea {
         padding: 0 20px;
         margin: 0 auto;
     }
-    .email-app {
+    .email-app-container {
         font-size: 1.2rem;
     }
     .email-list {

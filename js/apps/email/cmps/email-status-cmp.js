@@ -1,7 +1,8 @@
 export default {
     props: ['emails'],
     template: `
-        <div class="email-status">Status: {{unreadEmails}} Unread Emails</div>
+        <!-- <div class="email-status">Status: {{unreadEmails}} Unread Emails</div> -->
+        <div class="email-status">{{unreadEmails}} Unread Emails</div>
     `,
     methods: {
     },

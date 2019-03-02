@@ -12,9 +12,12 @@ import emailCompose from './apps/email/cmps/email-compose-cmp.js'
 const routes = [
     { path: '/', component: homeCmp },
     { path: '/about', component: aboutCmp },
-    { path: '/email', component: emailApp },
-    { path: '/email/compose', component: emailCompose },
-    { path: '/email/:emailId', component: emailDetails },
+    {
+        path: '/email', component: emailApp, children:
+            [{ path: '/email/:emailId', component: emailDetails }]
+    },
+    // { path: '/email/compose', component: emailCompose },
+    // { path: '/email/:emailId', component: emailDetails },
     {
         path: '/keep', component: keepApp, children:
             [{ path: 'noteadd', component: noteAdd }]

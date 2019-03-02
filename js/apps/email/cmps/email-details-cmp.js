@@ -1,12 +1,12 @@
 import emailService from '../services/email-service.js';
 import emailCompose from '../cmps/email-compose-cmp.js';
 import userMsg from './user-msg-cmp.js';
-import { eventBus, SEND_EMAIL } from '../../services/eventbus-service.js';
+import { eventBus, SEND_EMAIL, DETAILS_CLOSED } from '../../services/eventbus-service.js';
 
 export default {
     // props: ['email'],
     template: `
-        <section v-if="email" class="email-details email-wrapper flex">
+        <section v-if="email" class="email-details flex">
             <div v-show="!isReply" class="font-bold">{{email.subject}}</div>
             <div v-show="!isReply">From: {{email.from}}</div>
             <div v-show="!isReply">To: {{email.to}}</div>
@@ -35,6 +35,7 @@ export default {
     },
     methods: {
         onCloseEmail() {
+            eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
             this.$router.push('/email');
         },
         onDeleteEmail() {
@@ -43,16 +44,19 @@ export default {
                     console.log('Email was deleted');
                     this.$router.push('/email');
                 });
+            eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
         },
         onUnreadEmail() {
             this.email.isRead = false;
+            eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
             this.$router.push('/email');
         },
         onReplyEmail() {
             this.isReply = true;
         },
         onCloseReply() {
-            console.log('onCloseReply');
+            // console.log('onCloseReply');
+            eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
             this.isReply = false;
             this.$router.push('/email');
         },
@@ -70,6 +74,7 @@ export default {
                     var message = { msg: 'Error! ' + res, type: 'error' };
                     eventBus.$emit(SEND_EMAIL, { ...message });
                 });
+            eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
         }
     },
     computed: {

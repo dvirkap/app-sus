@@ -5,29 +5,36 @@ import emailFilter from '../cmps/email-filter-cmp.js';
 import emailSort from '../cmps/email-sort-cmp.js';
 import emailCompose from '../cmps/email-compose-cmp.js';
 import userMsg from '../cmps/user-msg-cmp.js';
-import { eventBus, SEND_EMAIL } from '../../services/eventbus-service.js';
+import { eventBus, SEND_EMAIL, DETAILS_CLOSED } from '../../services/eventbus-service.js';
 
 export default {
     template: `
-        <section class="email-app email-wrapper">
-            <!--<router-link to="/about">Inbox</router-link>-->
-            <h1 v-show="!isCompose">Appsus Email</h1>
-            <!-- <button v-on:click="onComposeClicked">Compose</button> -->
-            <!-- <router-link class="font-bold" to="/email/compose" v-on:click.native="onComposeClicked">Compose</router-link> -->
-            <a v-show="!isCompose" class="font-bold" v-on:click="onComposeClicked">Compose</a>
-            <a v-show="!isCompose" v-bind:class="classObjectInbox" v-on:click="onInboxClicked">Inbox</a>
-            <a v-show="!isCompose" v-bind:class="classObjectSent" v-on:click="onSentClicked">Sent</a>
-            <!-- <button v-on:click="onInboxClicked">Inbox</button> -->
-            <!-- <button v-on:click="onSentClicked">Sent</button> -->
-            
-            <email-compose v-if="isCompose" v-on:close="onCloseCompose" v-on:send="onSendEmail" :emailProp="email" :reply="false"></email-compose>
-            <div class="flex">
-                <email-filter v-show="!isCompose" v-on:filtered="setFilter"></email-filter>
-                <email-sort v-show="!isCompose" v-bind:emails="emails"></email-sort>
+        <section class="email-app-container flex email-wrapper">
+            <header class="email-app-header flex">
+                <h3>Appsus Email</h3>
+                <email-filter class="email-app-header-item" v-on:filtered="setFilter"></email-filter>
+                <email-sort class="email-app-header-item" v-bind:emails="emails"></email-sort>
+            </header>
+            <div class="email-app-content-container flex">
+                <nav class="email-app-nav flex">
+                <!-- <button v-on:click="onComposeClicked">Compose</button> -->
+                <!-- <router-link class="font-bold" to="/email/compose" v-on:click.native="onComposeClicked">Compose</router-link> -->
+                    <a class="email-app-nav-item font-bold" v-on:click="onComposeClicked">Compose</a>
+                    <a class="email-app-nav-item" v-bind:class="classObjectInbox" v-on:click="onInboxClicked">Inbox</a>
+                    <a class="email-app-nav-item" v-bind:class="classObjectSent" v-on:click="onSentClicked">Sent</a>
+                    <!-- <button v-on:click="onInboxClicked">Inbox</button> -->
+                    <!-- <button v-on:click="onSentClicked">Sent</button> -->
+                    <email-status class="email-app-nav-item" v-bind:emails="emails"></email-status>
+                </nav>
+                <main class="email-app-main">
+                    <router-view></router-view>
+                    <email-list v-show="!isCompose && !isDetails" v-bind:emails="emailsToShow" v-on:delete="onDeleteEmail" v-on:click.native="emailListClicked"></email-list>
+                    <email-compose v-if="isCompose" v-on:close="onCloseCompose" v-on:send="onSendEmail" :emailProp="email" :reply="false"></email-compose>
+                </main>
+                <nav class="email-app-nav">
+                </nav>
             </div>
-            <email-status v-show="!isCompose" v-bind:emails="emails"></email-status>
-            <email-list v-show="!isCompose" v-bind:emails="emailsToShow" v-on:delete="onDeleteEmail"></email-list>
-            <!-- <router-view></router-view> -->
+            <!-- <router-link to="/about">Inbox</router-link> -->
             <!-- <user-msg></user-msg> -->
         </section> 
     `,
@@ -40,6 +47,7 @@ export default {
             },
             isCompose: false,
             isInbox: true,
+            isDetails: false,
             email: {
                 from: 'nirfuchs@appsus.com',
                 to: 'nirfuchs@appsus.com',
@@ -52,6 +60,7 @@ export default {
     methods: {
         onComposeClicked() {
             // console.log('Compose new email');
+            this.$router.push('/email');
             this.isCompose = true;
         },
         onCloseCompose() {
@@ -85,10 +94,20 @@ export default {
             this.filterBy = filterBy;
         },
         onInboxClicked() {
+            this.isCompose = false;
+            this.isDetails = false;
             this.isInbox = true;
+            this.$router.push('/email');
         },
         onSentClicked() {
+            this.isCompose = false;
+            this.isDetails = false;
             this.isInbox = false;
+            this.$router.push('/email');
+        },
+        emailListClicked() {
+            // console.log('emailListClicked');
+            this.isDetails = true;
         }
     },
     computed: {
@@ -131,6 +150,13 @@ export default {
     created() {
         emailService.getEmails()
             .then(emails => this.emails = emails);
+
+    },
+    mounted() {
+        eventBus.$on(DETAILS_CLOSED, message => {
+            // console.log(message);
+            this.isDetails = false;
+        });
     },
     components: {
         emailList,

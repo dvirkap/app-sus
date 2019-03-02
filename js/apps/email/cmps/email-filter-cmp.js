@@ -1,7 +1,7 @@
 export default {
     template: `
         <section class="email-filter">
-            Search: <input type="text" placeholder="Filter by text" v-on:keyup.enter="emitFilter" v-model="filterBy.text" />
+            <input type="text" placeholder="Search" v-on:keyup.enter="emitFilter" v-model="filterBy.text" />
             <select v-model="filterBy.type" v-on:change="emitFilter">
                 <option value="All" selected>All</option>
                 <option value="Read">Read</option>
