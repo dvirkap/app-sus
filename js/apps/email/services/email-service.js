@@ -17,32 +17,22 @@ function _createEmails() {
     var emails = storageService.load(EMAILS_KEY);
     if (!emails || emails.length === 0) {
         var body = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil laborum reiciendis a, unde sequi dolore fuga ipsam vitae at suscipit ea iste tempore cupiditate, earum iusto voluptas ipsa quo! Eaque.'
-        var emails = [
-            _createEmail({
-                from: 'user1@gmail.com',
+        var emails = [];
+        for (var i = 0; i < 10; i++) {
+            var from = '';
+            if (i % 2) from = 'nirfuchs@appsus.com';
+            else from = 'user' + i + '@gmail.com';
+            var email = {
+                from: from,
                 to: 'nirfuchs@appsus.com',
                 cc: '',
-                subject: 'This is a test email 1',
-                body: '1' + body,
-                sentAt: 1551133930590
-            }),
-            _createEmail({
-                from: 'user2@gmail.com',
-                to: 'nirfuchs@appsus.com',
-                cc: '',
-                subject: 'This is a test email 2',
-                body: '2' + body,
-                sentAt: 1551133930594
-            }),
-            _createEmail({
-                from: 'user3@gmail.com',
-                to: 'nirfuchs@appsus.com',
-                cc: '',
-                subject: 'This is a test email 3',
-                body: '3' + body,
-                sentAt: 1551267824290
-            }),
-        ];
+                subject: 'This is a test email ' + i,
+                body: i + body,
+                sentAt: Date.now()
+            };
+            emails.push(_createEmail(email));
+        }
+        
         storageService.store(EMAILS_KEY, emails);
     } else {
         gNextId = findNextId(emails);
