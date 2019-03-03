@@ -20,7 +20,7 @@ export default {
             </div>
         </li>
         
-        <router-view name="editnote"></router-view>
+        <!-- <router-view name="editnote"></router-view> -->
         
         <li v-for="(currNote, idx) in notes" :key="currNote.id" @click="editNote" :class="{'keep-edit-note-container' : isEditNoteVisible}" >
 
@@ -38,7 +38,7 @@ export default {
             isRouterViewHidden: true,
             isAddNewNoteButtonVisibile: false,
             isAddNoteActivated: true,
-            colorVal:  null,
+            colorVal: null,
             isEditNoteVisible: false,
 
 
@@ -48,61 +48,61 @@ export default {
     methods: {
         outsideTheBox() {
             console.log('note ref', this.$refs.note.id);
-            
+
         },
-        
+
         editNote() {
             this.isEditNoteVisible = true;
             // debugger;
             // router.push({ name: 'editnote'})
         },
-        
+
         // params: { userId: 123 }
-//             var el = document.getElementById("outside");
-       
+        //             var el = document.getElementById("outside");
+
         newcolor(newBgColor) {
             this.colorVal = newBgColor;
-            console.log('this.colorVal',this.colorVal )
+            console.log('this.colorVal', this.colorVal)
         },
         addNewNote() {
             this.isRouterViewHidden = false;
             this.isAddNewNoteButtonVisibile = true;
         },
-        
+
     },
 
 
     created() {
-        
+
         noteService.getNotes()
             .then(notes => this.notes = notes),
             this.notes.filter(note => {
                 note.isDeleted === false;
                 console.log(note);
-                
+
             }),
-            function() {
-                window.addEventListener('mousedown',this.listenToClick);
+            function () {
+                window.addEventListener('mousedown', this.listenToClick);
             }
-            
-        
-            
+
+
+
     },
     destroyed: function () {
-        window.removeEventListener('mousedown',this.listenToClick)
-        console.log(window.removeEventListener('mousedown',this.listenToClick));
-        
-      },
+        window.removeEventListener('mousedown', this.listenToClick)
+        console.log(window.removeEventListener('mousedown', this.listenToClick));
+
+    },
 
     computed: {
         // function() {
         //     newthis.notes.filter(note => {
         //         console.log(note);
         //      return   note.isDeleted === false;
-                
+
         //     })
         // }
-        
+
     },
     components: {
         notePreview
@@ -112,30 +112,30 @@ export default {
         // this.$nextTick(()=> {
         //     console.log()
         //   }),
-          
-          eventBus.$on(NEW_NOTE_CREATED, newNote => {
-              if(this.isRouterViewHidden === false) {
-                  this.isRouterViewHidden = true;
-              }
-              if(this.isAddNewNoteButtonVisibile === true) {
-                  this.isAddNewNoteButtonVisibile = false;
-              }
-              
-              console.log('note ref after mounted:', this.$refs.note.classList.toggle('keep-hidden'));
-              console.log('note ref after mounted:', this.$refs.liNewNote.classList.toggle('keep-expand-note-container'));
-              console.log('note ref after mounted:', this.$refs.addNewNoteButton.classList.toggle('keep-hidden'));
-              console.log('new note:', newNote);
-              noteService.getNotes()
-              .then(notes => this.notes = notes)
+
+        eventBus.$on(NEW_NOTE_CREATED, newNote => {
+            if (this.isRouterViewHidden === false) {
+                this.isRouterViewHidden = true;
+            }
+            if (this.isAddNewNoteButtonVisibile === true) {
+                this.isAddNewNoteButtonVisibile = false;
+            }
+
+            console.log('note ref after mounted:', this.$refs.note.classList.toggle('keep-hidden'));
+            console.log('note ref after mounted:', this.$refs.liNewNote.classList.toggle('keep-expand-note-container'));
+            console.log('note ref after mounted:', this.$refs.addNewNoteButton.classList.toggle('keep-hidden'));
+            console.log('new note:', newNote);
+            noteService.getNotes()
+                .then(notes => this.notes = notes)
         })
-        
-        
+
+
     },
-    
+
     watch: {
 
     },
-    
+
 
 
 }
