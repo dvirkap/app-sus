@@ -76,12 +76,12 @@ export default {
             emailService.addEmail(emailObj)
                 .then(() => {
                     // console.log('Email was sent');
-                    var message = { msg: 'Success! Email was sent', type: 'success' };
-                    eventBus.$emit(SEND_EMAIL, { ...message });
+                    // var message = { msg: 'Success! Email was sent', type: 'success' };
+                    // eventBus.$emit(SEND_EMAIL, { ...message });
                     this.isCompose = false;
                 }).catch((res) => {
-                    var message = { msg: 'Error! ' + res, type: 'error' };
-                    eventBus.$emit(SEND_EMAIL, { ...message });
+                    // var message = { msg: 'Error! ' + res, type: 'error' };
+                    // eventBus.$emit(SEND_EMAIL, { ...message });
                     this.isCompose = false;
                 });
         },
