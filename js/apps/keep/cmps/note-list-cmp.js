@@ -1,5 +1,6 @@
 import noteService from '../services/note-service.js';
 import notePreview from './note-preview-cmp.js';
+import { eventBus, NEW_NOTE_CREATED } from '../../services/eventbus-service.js';
 
 export default {
     template: `
@@ -7,9 +8,9 @@ export default {
         <!-- <h2>User {{ $route.params.id }}</h2> -->
         
     <ul class="keep-list-container ">
-        <li  class="shadow-drop-2-center " :class="{'keep-add-note-container' : isAddNewNoteButtonVisibile}" :style="{backgroundColor: colorVal}" v-on:bgcolor="newcolor" >
+        <li  class="shadow-drop-2-center " :class="{'keep-expand-note-container' : isAddNewNoteButtonVisibile}" :style="{backgroundColor: colorVal}" v-on:bgcolor="newcolor">
             <div id="newNote"  ref="note" :class="{'keep-hidden' : isRouterViewHidden}" >
-                    <router-view name="newnote"></router-view>
+                    <router-view></router-view>
                 </div>
                 <div :class="{'keep-hidden' : isAddNewNoteButtonVisibile}"  @click="addNewNote" >
                     <router-link to="/keep/noteadd">
@@ -44,6 +45,8 @@ export default {
         }
     },
     methods: {
+
+        
         editNote() {
             this.isEditNoteVisible = true;
             // debugger;
@@ -66,12 +69,15 @@ export default {
 
 
     created() {
+        
         noteService.getNotes()
             .then(notes => this.notes = notes),
 
             function() {
                 window.addEventListener('mousedown',this.listenToClick);
             }
+            
+        
             
     },
     destroyed: function () {
@@ -81,7 +87,7 @@ export default {
       },
 
     computed: {
-
+        
         
     },
     components: {
@@ -92,10 +98,16 @@ export default {
         this.$nextTick(()=> {
             console.log()
           })
+          eventBus.$on(NEW_NOTE_CREATED, newNote => {
+            console.log('new note:', newNote);
+        })
+          
           
         },
 
-    
+    watch: {
+
+    },
 
 
 }

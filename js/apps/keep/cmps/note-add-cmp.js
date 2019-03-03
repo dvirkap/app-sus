@@ -2,6 +2,7 @@ import createNoteId from '../../services/utils-service.js'
 import noteService from '../services/note-service.js';
 // import Verte from '../../../../lib/node_modules/verte/dist/verte.js';
   import '../../../../lib/jscolor/jscolor.js';
+  import { eventBus, NEW_NOTE_CREATED } from '../../services/eventbus-service.js';
 
 export default {
     template: `
@@ -71,6 +72,11 @@ data() {
                 // var result = regExp(str, '(?<=http).+?(?=jpg)', 'match')
                 if(this.myTitle && this.myText && this.isNoteCreated === false) {
                     this.isNoteCreated  = true
+                    eventBus.$emit(NEW_NOTE_CREATED, this.isNoteCreated);
+                    
+                    //    this.$emit('new-note-created', this.isNoteCreated)
+                    //    NEW_NOTE_CREATED = 'new-note-created';
+                    
                     // console.log(ev.target.localName);
                     console.log('outside touch detected');
                     console.log('note.id:', this.newNote.id);
@@ -79,7 +85,7 @@ data() {
         })
              }
                 
-                if(this.myText.includes('jpeg') || this.myText.includes('png') || this.myText.includes('gif') || this.myText.includes('jpeg')) {
+                if(this.myText.includes('jpeg') || this.myText.includes('png') || this.myText.includes('gif') || this.myText.includes('jpeg')|| this.myText.includes('picsum')) {
                     this.noteType = 'image'
                     var result = null;
                     var regExp = /\bhttp.*/;

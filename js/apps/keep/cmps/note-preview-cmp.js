@@ -1,3 +1,6 @@
+// import noteAddCmp from "./note-add-cmp";
+import noteService from '../services/note-service.js';
+
 // import noteList from  ''
 
 
@@ -11,4 +14,17 @@ export default {
 
     `,
     
+
+    // data() {
+    //     return{
+    //         note: null,
+    //     }
+    // },
+    created() {
+        
+            
+            // noteService.postionPinnedNotesOnTop(note.id)
+        
+    },
+
     }

@@ -4,7 +4,9 @@ import storage from '../../services/storage-service.js'
 export default {
     getNotes,
     getNotesById,
-    addNote
+    addNote,
+    saveNotesById,
+    movePinnedNotesToTop
 }
 const NOTES_KEY = 'notes';
 var numberOfNotes = 10;
@@ -29,7 +31,7 @@ function createDummyNotes(number) {
                 "categories": [rndWords.words(1).join(' '), rndWords.words(1).join(' ')],
                 "listItems": [rndWords.words(5).join(' '), rndWords.words(5).join(' '), rndWords.words(5).join(' ')],
                 "sound": "sound url from local storage",
-                "isPinned": false,
+                "isPinned": -1,
                 "isDeleted": false,
                 "color": "red"
 
@@ -61,7 +63,7 @@ function saveToStorage() {
 
 function getNotes() {
     // var randomWords = require('random-words');
-
+    
     console.log('rnd:', rndWords.words(3).join(' '));
     gNotes = storage.load(NOTES_KEY)
     console.log('Check gNotes before Promise:', gNotes);
@@ -78,5 +80,26 @@ function getNotesById(CurrNoteId) {
 
 }
 
+function saveNotesById(CurrNoteId, note) {
+    gNotes = storage.load(NOTES_KEY);
+    var prevNoteIdx = gNotes.findIndex(note => {
+        return CurrNoteId === note.id})
+    console.log('prev:', prevNoteIdx);
+        gNotes.splice(prevNoteIdx, 1, note)
+    storage.store(NOTES_KEY, gNotes);
+    return Promise.resolve(gNotes);
+}
+
+function movePinnedNotesToTop() {
+    gNotes = storage.load(NOTES_KEY);
+    var newArr = gNotes.sort((a, b) => b - a)
+       gNotes = newArr; 
+            console.log('new array:', gNotes);
+            
+       
+    
+    storage.store(NOTES_KEY, gNotes);
+    return Promise.resolve(gNotes);
+}
 
 
