@@ -1,6 +1,7 @@
 import emailService from '../services/email-service.js';
 import emailCompose from '../cmps/email-compose-cmp.js';
 import userMsg from './user-msg-cmp.js';
+import noteService from '../../keep/services/note-service.js';
 import { eventBus, SEND_EMAIL, DETAILS_CLOSED } from '../../services/eventbus-service.js';
 
 export default {
@@ -13,11 +14,12 @@ export default {
             <div v-show="!isReply">Cc: {{email.cc}}</div>
             <div v-show="!isReply">Sent at: {{fornatedDate}}</div>
             <!-- <hr> -->
-            <textarea v-show="!isReply" class="email-details-textarea" rows="12" cols="40" readonly>{{email.body}}</textarea>
+            <textarea v-show="!isReply" class="email-details-textarea" rows="15" cols="40" readonly>{{email.body}}</textarea>
             <!-- <p>{{email.body}}</p> -->
             <!-- <hr> -->
             <div v-show="!isReply" class="email-details-btn-container flex">
                 <!-- <router-link to="/email" class="email-details-link">Back to Inbox</router-link> -->
+                <button class="email-details-btn" v-on:click="onKeepEmail">Keep</button>
                 <button class="email-details-btn" v-on:click="onCloseEmail">Close</button>
                 <button class="email-details-btn" v-on:click="onReplyEmail">Reply</button>
                 <button class="email-details-btn" v-on:click="onUnreadEmail">Make unread</button>
@@ -42,9 +44,9 @@ export default {
             emailService.deleteEmail(this.email.id)
                 .then(() => {
                     console.log('Email was deleted');
+                    eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
                     this.$router.push('/email');
                 });
-            eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
         },
         onUnreadEmail() {
             this.email.isRead = false;
@@ -66,15 +68,28 @@ export default {
             emailService.addEmail(emailObj)
                 .then((res) => {
                     // console.log('Reply Email was sent');
-                    var message = { msg: 'Success! Reply Email was sent', type: 'success' };
-                    eventBus.$emit(SEND_EMAIL, { ...message });
+                    // var message = { msg: 'Success! Reply Email was sent', type: 'success' };
+                    // eventBus.$emit(SEND_EMAIL, { ...message });
+                    eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
                     this.isReply = false;
                     this.$router.push('/email');
                 }).catch((res) => {
-                    var message = { msg: 'Error! ' + res, type: 'error' };
-                    eventBus.$emit(SEND_EMAIL, { ...message });
+                    // var message = { msg: 'Error! ' + res, type: 'error' };
+                    // eventBus.$emit(SEND_EMAIL, { ...message });
                 });
-            eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
+        },
+        onKeepEmail() {
+            var noteObj = {
+                title: this.email.subject,
+                txt: this.email.body,
+                dateCreated: Date.now()
+            }
+            noteService.addNote(noteObj)
+                .then((res) => {
+                    // console.log(res);
+                    eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
+                    this.$router.push('/email');
+                });
         }
     },
     computed: {
@@ -104,6 +119,7 @@ export default {
 
     components: {
         emailCompose,
-        userMsg
+        userMsg,
+        noteService
     }
 }
