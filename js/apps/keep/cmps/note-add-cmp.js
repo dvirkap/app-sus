@@ -58,6 +58,7 @@ data() {
     methods: {
         saveNewNote() {
             eventBus.$emit(NEW_NOTE_CREATED, this.isNoteCreated);
+            this.$router.push('/keep')
             
             },
         listenToClick(ev){
@@ -73,6 +74,8 @@ data() {
             console.log('this.colorVal:',val.target.style.backgroundColor );
             this.colorVal = val.target.style.backgroundColor
             console.log(this.$refs.form.style.backgroundColor = this.colorVal);
+            this.newNote.color = this.colorVal;
+            noteService.saveNotesById(this.noteId, this.newNote)
             
             // 'jscolor' instance can be used as a string
         //    var currColor = this.$refs.colorVal.style.backgroundColor;

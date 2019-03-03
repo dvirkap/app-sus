@@ -19,8 +19,9 @@ export default {
                 </router-link>
             </div>
         </li>
-        
+        <transition name="fade">
         <router-view name="editnote"></router-view>
+        </transition>
         <li v-for="(currNote, idx) in notes" :key="currNote.id" @click="editNote" :class="{'keep-edit-note-container' : isEditNoteVisible}" >
 
             <router-link :to="'/keep/' + currNote.id">

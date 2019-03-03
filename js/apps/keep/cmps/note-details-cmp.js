@@ -13,9 +13,9 @@ export default {
         <iframe :class="{'keep-hidden' : !this.note.videourl}" class="keep-new-note-img" v-bind:src="'https://www.youtube.com/embed/' + this.note.videourl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
         <!-- <input class="fas fa-palette jscolor" ref="colorVal" @change="updateColor"> -->
         <!-- <input type="text" @input="editNote()" v-model="categories" placeholder="categories"> -->
-        <button @click="isPinned()">Pin note</button>
-        <button @click="isDeleted()">Delete</button>
-        <button @click="$router.push('/keep')" >Save</button>
+        <button type="button" @click="isPinned()">Pin note</button>
+        <button type="button" @click="isDeleted()">Delete</button>
+        <button type="button" @click="$router.push('/keep')" >Save</button>
 </form>
         <div>{{ $route.params}}    </div>
     </section>

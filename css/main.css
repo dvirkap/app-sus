@@ -83,3 +83,8 @@ a:hover
     height: 50px;
     width: 100%;
 }
+
+.jello-horizontal {
+	animation: jello-horizontal 0.9s both;
+}
+
