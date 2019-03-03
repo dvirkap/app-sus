@@ -7,6 +7,22 @@ const myRouter = new VueRouter({routes: myRoutes})
 window.vueApp = new Vue({
     el: '#app',
     router: myRouter,
+    template:`
+        <section>
+            <div class="main-nav">
+                <nav>
+                    <router-link to="/" exact>Home</router-link>
+                    <router-link to="/keep">Keep</router-link>
+                    <router-link to="/email">Email</router-link>
+                    <router-link to="/about">About</router-link>
+                </nav>
+            </div>
+            <router-view></router-view>
+            <footer>
+            Copyright &copy; 2019
+            </footer>
+        </section>
+    `,
     components: {
       
     }

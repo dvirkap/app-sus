@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-
-*{
+* {
     box-sizing: border-box;
 }
 
@@ -22,18 +21,25 @@ ul {
     list-style-type: none;
     padding: 0px;
 }
+
 li {
     text-decoration-style: none;
 }
+
 a {
     all: unset;
 }
+
 a {
     text-decoration: none;
 }
 
-a:hover 
-{
-     text-decoration:none; 
-     cursor:pointer;  
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.main-nav {
+    height: 50px;
+    width: 100%;
 }
