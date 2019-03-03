@@ -79,13 +79,8 @@ export default {
                 });
         },
         onKeepEmail() {
-            var title = `${this.email.subject}
-From: ${this.email.from}
-To: ${this.email.to}
-Sent at: ${this.fornatedDate}`;
-
             var noteObj = {
-                title: title,
+                title: this.email.subject,
                 txt: this.email.body,
                 dateCreated: Date.now()
             }
