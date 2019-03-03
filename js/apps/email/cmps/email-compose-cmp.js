@@ -7,7 +7,7 @@ export default {
     props: ['emailProp', 'reply'],
     template: `
         <section class="email-compose flex">
-            <div class="font-bold">New Message</div>
+            <!-- <div class="font-bold">New Message</div> -->
             <div class="flex">
                 <!-- <label class="email-compose-label">To:</label> -->
                 <input class="email-compose-text" placeholder="To:" type="text" v-model="email.to">

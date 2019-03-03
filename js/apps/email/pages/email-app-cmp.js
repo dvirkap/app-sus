@@ -166,6 +166,11 @@ export default {
     created() {
         emailService.getEmails()
             .then(emails => this.emails = emails);
+            if (!window.matchMedia("(min-width: 750px)").matches) {
+                this.isShowNav = false;
+            }else{
+                this.isShowNav = true;
+            }
 
     },
     mounted() {
