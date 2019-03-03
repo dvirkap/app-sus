@@ -11,12 +11,12 @@ window.vueApp = new Vue({
         <section>
             <div class="main-nav">
                 <nav class="main-nav-menu">
-                    <!-- <i class="fas fa-hamburger bars" v-on:click="onHamburgerClicked"></i> -->
+                    <i class="fas fa-hamburger bars" v-on:click="onHamburgerClicked"></i>
                     
-                    <router-link to="/" exact><i class="fas fa-home"> Home</i></router-link>
+                    <!-- <router-link to="/" exact><i class="fas fa-home"> Home</i></router-link>
                     <router-link to="/keep"><i class="fas fa-thumbtack"> Keep</i></router-link>
                     <router-link to="/email"><i class="far fa-envelope"> Email</i></router-link>
-                    <router-link to="/about"><i class="far fa-user"> About</i></router-link>
+                    <router-link to="/about"><i class="far fa-user"> About</i></router-link> -->
                 </nav>
             </div>
             <router-view></router-view>
