@@ -22,7 +22,7 @@
 
 .email-compose {
     flex-direction: column;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .email-compose-label {
@@ -49,7 +49,7 @@
 
 .email-details {
     flex-direction: column;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .email-details-textarea {
@@ -79,7 +79,7 @@
 } */
 
 .email-app-container {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     flex-direction: column;
     height: 100vh;
     /* background-color: yellow; */
@@ -144,7 +144,7 @@ email-app-header-item {
 }
 
 .email-list {
-    /* font-size: 0.8rem; */
+    font-size: 0.9rem;
 }
 
 input, button, select, optgroup, textarea {
