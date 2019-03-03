@@ -1,8 +1,8 @@
 import createNoteId from '../../services/utils-service.js'
 import noteService from '../services/note-service.js';
 // import Verte from '../../../../lib/node_modules/verte/dist/verte.js';
-  import '../../../../lib/jscolor/jscolor.js';
-  import { eventBus, NEW_NOTE_CREATED } from '../../services/eventbus-service.js';
+import '../../../../lib/jscolor/jscolor.js';
+import { eventBus, NEW_NOTE_CREATED } from '../../services/eventbus-service.js';
 
 export default {
     template: `
@@ -39,21 +39,21 @@ export default {
 `,
 
 
-data() {
-    return {
-        newNote: null,
-        myTitle: null,
-        myText: null,
-        isTitleActive: false,
-        isTextActive: false,
-        isAddNoteActivated: true,
-        colorVal: null,
-        categories: null,
-        noteType: 'text',
-        imageurl:null,
-        videourl:null,
-        noteId: null,
-        isNoteCreated: false,
+    data() {
+        return {
+            newNote: null,
+            myTitle: null,
+            myText: null,
+            isTitleActive: false,
+            isTextActive: false,
+            isAddNoteActivated: true,
+            colorVal: null,
+            categories: null,
+            noteType: 'text',
+            imageurl: null,
+            videourl: null,
+            noteId: null,
+            isNoteCreated: false,
 
         }
     },
@@ -61,71 +61,62 @@ data() {
         saveNewNote() {
             eventBus.$emit(NEW_NOTE_CREATED, this.isNoteCreated);
             this.$router.push('/keep')
-            
-            },
-        listenToClick(ev){
-        //    console.log('ev:', ev.target.id);  
-           if(this.$refs.title.id !== ev.target.id )
-           console.log('success');
-           
-        //    console.log('ev  :', this.$refs.title.id);  
-        //    console.log('ev:', ev.target.id);  
-           
+
+        },
+        listenToClick(ev) {
+            // //    console.log('ev:', ev.target.id);  
+            //    if(this.$refs.title.id !== ev.target.id )
+            //    console.log('success');
+
+            //    console.log('ev  :', this.$refs.title.id);  
+            //    console.log('ev:', ev.target.id);  
+
         },
         updateColor(val) {
-            console.log('this.colorVal:',val.target.style.backgroundColor );
+            console.log('this.colorVal:', val.target.style.backgroundColor);
             this.colorVal = val.target.style.backgroundColor
             console.log(this.$refs.form.style.backgroundColor = this.colorVal);
             this.newNote.color = this.colorVal;
             noteService.saveNotesById(this.noteId, this.newNote)
-            
+
             // 'jscolor' instance can be used as a string
-        //    var currColor = this.$refs.colorVal.style.backgroundColor;
-        //    this.colorVal = currColor;
-        //     this.$emit('bgcolor', this.colorVal)
-         
-            
+            //    var currColor = this.$refs.colorVal.style.backgroundColor;
+            //    this.colorVal = currColor;
+            //     this.$emit('bgcolor', this.colorVal)
+
+
         },
         addNewNote() {
             if (this.myText) {
-                if(this.myTitle && this.myText && this.isNoteCreated === false) {
-                    
-                    this.isNoteCreated  = true
-                    
-                    // console.log('outside touch detected');
-                    // console.log('note.id:', this.newNote.id);
+                if (this.myTitle && this.myText && this.isNoteCreated === false) {
+
+                    this.isNoteCreated = true
                     noteService.addNote(this.newNote).then((res) => {
-                        console.log('idddd:',res.id);
+                        console.log('idddd:', res.id);
                         // console.log('yes');
                         this.noteId = res.id
 
                     })
                 }
-                if(this.isNoteCreated) {
-                    // noteService.getNotesById()
-                    // this.newNote.id = this.noteId;
-                    // console.log('update note by id',this.newNote.id );
+                if (this.isNoteCreated) {
                     noteService.saveNotesById(this.noteId, this.newNote)
-                    // noteService.saveNotesById(this.newNote.id, this.newNote)
-                    
+
                 }
-                // console.log('this.isNoteCreated', this.isNoteCreated);
-                
-                if(this.myText.includes('jpeg') || this.myText.includes('png') || this.myText.includes('gif') || this.myText.includes('jpeg')|| this.myText.includes('picsum')) {
+                if (this.myText.includes('jpeg') || this.myText.includes('png') || this.myText.includes('gif') || this.myText.includes('jpeg') || this.myText.includes('picsum')) {
                     this.noteType = 'image'
                     var result = null;
                     var regExp = /\bhttp.*/;
-                    result = regExp.exec(this.myText);                    
+                    result = regExp.exec(this.myText);
                     var tempStr = this.myText.replace(regExp, '')
                     this.myText = tempStr
                     var imageurl = result
                     this.imageurl = imageurl;
                     console.log('restul:', result);
                     // noteService.saveNotesById(this.newNote.id, this.newNote)
-                    
+
                 }
-                
-                if(this.myText.includes('youtu')) { 
+
+                if (this.myText.includes('youtu')) {
                     this.noteType = 'video'
                     var regExp = /\b((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
                     var result = regExp.exec(this.myText);
@@ -133,18 +124,18 @@ data() {
                     var tempStr = this.myText.replace(regExp, '')
                     this.myText = tempStr
                     var currVideoUrl = result[0]
-                    regExp = /=(.*)/ 
+                    regExp = /=(.*)/
                     this.videourl = currVideoUrl;
                     result = regExp.exec(currVideoUrl);
                     this.videourl = result[0].substring(1)
                     console.log(this.videourl);
                     // noteService.saveNotesById(this.newNote.id, this.newNote)
                 }
-                
+
             }
-        
-    
-            
+
+
+
             this.newNote = {
                 "id": this.noteId,
                 "type": this.noteType,
@@ -162,23 +153,23 @@ data() {
             }
         }
 
-        },
+    },
 
-        getNewNoteType(val) {
-            // console.log(this.colorVal);
-            
-            if (!this.myTitle) {
-                this.isTitleActive = true
-            } else if  (!this.myText) {
-                this.isTextActive = true
+    getNewNoteType(val) {
+        // console.log(this.colorVal);
+
+        if (!this.myTitle) {
+            this.isTitleActive = true
+        } else if (!this.myText) {
+            this.isTextActive = true
         } else {
             this.noteType = val;
-            
+
         }
 
 
     },
- 
+
     //   titleTextValidation() {
     //     if(this.isTitleActive === true) {
     //         if(this.myTitle || this.myText) {
@@ -189,27 +180,27 @@ data() {
 
     //     }
     //   }
-watch: {
-    myTitle(val) {
-        if (val) {
-            this.isTitleActive = false
-        }
+    watch: {
+        myTitle(val) {
+            if (val) {
+                this.isTitleActive = false
+            }
         },
         myText(val) {
-        if (val) {
-            this.isTextActive = false
-        }
+            if (val) {
+                this.isTextActive = false
+            }
+
+        },
+        noteId(val) {
+            if (!val) {
+                val = createNoteId.makeId(8)
+                console.log('iddddd:', this.noteId);
+
+            }
+        },
 
     },
-    noteId(val) {
-        if(!val) {
-           val = createNoteId.makeId(8)
-           console.log('iddddd:', this.noteId);
-           
-        }
-    },
-
-},
 
 }
 

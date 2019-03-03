@@ -27,14 +27,14 @@ function createDummyNotes(number) {
                 "title": rndWords.words(3).join(' '),
                 "txt": rndWords.words(20).join(' '),
                 "dateCreated": Date.now(),
-                "img": "image url",
+                "img": "https://picsum.photos/200/300/?random",
                 "video": "video url",
                 "categories": [rndWords.words(1).join(' '), rndWords.words(1).join(' ')],
                 "listItems": [rndWords.words(5).join(' '), rndWords.words(5).join(' '), rndWords.words(5).join(' ')],
                 "sound": "sound url from local storage",
                 "isPinned": -1,
                 "isDeleted": false,
-                "color": "#fff"
+                "color": "#"+((1<<24)*Math.random()|0).toString(16)
 
             })
         }
@@ -101,9 +101,9 @@ function deleteNoteById(CurrNoteId) {
 
 function movePinnedNotesToTop() {
     gNotes = storage.load(NOTES_KEY);
-    var newArr = gNotes.sort((a, b) => b - a)
-       gNotes = newArr; 
-            console.log('new array:', gNotes);
+    gNotes.sort((a, b) => a - b)
+       
+            console.log('new arrayyyyyy :', gNotes);
             
        
     
