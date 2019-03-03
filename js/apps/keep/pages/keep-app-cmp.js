@@ -7,7 +7,7 @@ import noteAdd from '../cmps/note-add-cmp.js';
 export default {
     template: `
         <section class="book-app">
-            <h1>Keep App</h1>
+            <div class="keep-app-header"></div>
             <note-list :notes="notesToShow"></note-list>
             
           

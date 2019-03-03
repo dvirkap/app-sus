@@ -17,10 +17,12 @@ export default {
         <!-- <img class="keep-new-note-img" v-bind:src="videourl + 'hqdefault.jpg'" />  -->
         <iframe :class="{'keep-hidden' : !videourl}" class="keep-new-note-img" v-bind:src="'https://www.youtube.com/embed/' + videourl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
         <!-- <input class="fas fa-palette jscolor" ref="colorVal" @change="updateColor"> -->
+        <div class="color-picker-container">
         <button type="button" @click="updateColor" class="color-dot" v-bind:style="{ 'background-color': '#6495ED' }"></button>
         <button type="button"  @click="updateColor" class="color-dot" v-bind:style="{ 'background-color': '#FF69B4' }"></button>
         <button type="button" @click="updateColor" class="color-dot" v-bind:style="{ 'background-color': '#E0FFFF' }"></button>
         <button type="button" @click="updateColor" class="color-dot" v-bind:style="{ 'background-color': '#00FA9A' }"></button>
+        </div>
         <button @click="saveNewNote" type="button" >Close</button>
 
         </form>

@@ -8,7 +8,7 @@
 }
 nav {
 /* position: fixed; */
-top: 0px;
+/* top: 0px; */
 /* height: 80px; */
 /* width: 100%;  */
 background-color: #3CBCC3;  
@@ -28,6 +28,7 @@ footer {
 body {
     margin: 0px;
     font-family: 'Roboto', sans-serif;
+    /* background-color: #F7F4E9; */
     background-color: #F7F4E9;
 }
 
@@ -82,11 +83,36 @@ a:hover
 .main-nav {
     height: 50px;
     width: 100%;
+    background-color: #3cbcc3;
 }
 
 .jello-horizontal {
 	animation: jello-horizontal 0.9s both;
 }
+@keyframes jello-horizontal {
+    0% {
+      transform: scale3d(1, 1, 1);
+    }
+    30% {
+      transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+      transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+      transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+      transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+      transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
 
 .about-main{
     justify-content: space-around;
@@ -95,3 +121,17 @@ a:hover
 .about-main img{
     border-radius: 50%;
 }
+
+.home-app-header {
+    height: 3em;
+    background-color: #3cbcc3;
+  }
+
+.about-app-header {
+    height: 3em;
+    background-color: #3cbcc3;
+  }
+  .bars {
+      font-size: 3em;
+      margin: 10px;
+  }

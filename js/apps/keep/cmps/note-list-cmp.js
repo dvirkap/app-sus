@@ -9,19 +9,19 @@ export default {
         
     <ul class="keep-list-container ">
         <li  class="shadow-drop-2-center " ref="liNewNote" :class="{'keep-expand-note-container' : isAddNewNoteButtonVisibile}" :style="{backgroundColor: colorVal}" v-on:bgcolor="newcolor">
-            <div id="newNote"  ref="note" :class="{'keep-hidden' : isRouterViewHidden}" @click="outsideTheBox">
+            <div id="newNote new-note-button-container"  ref="note" :class="{'keep-hidden' : isRouterViewHidden}" @click="outsideTheBox">
                     <router-view></router-view>
                 </div>
-                <div ref="addNewNoteButton" :class="{'keep-hidden' : isAddNewNoteButtonVisibile}"  @click="addNewNote" >
+                <div ref="addNewNoteButton"  :class="{'keep-hidden' : isAddNewNoteButtonVisibile}"  @click="addNewNote" >
                     <router-link to="/keep/noteadd">
-                    <div class="keep-preview-title">Click to add Note</div>
-                    <div class="keep-preview-txt">+</div>
+                    
+                    <div class="keep-preview-txt"><i class="fas fa-plus-circle large-plus"></i></div>
                 </router-link>
             </div>
         </li>
-        <transition name="fade">
+        
         <router-view name="editnote"></router-view>
-        </transition>
+        
         <li v-for="(currNote, idx) in notes" :key="currNote.id" @click="editNote" :class="{'keep-edit-note-container' : isEditNoteVisible}" >
 
             <router-link :to="'/keep/' + currNote.id">

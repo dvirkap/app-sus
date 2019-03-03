@@ -86,6 +86,7 @@
     height: auto;
 }
 .keep-title-input {
+    grid-row: 1;
     font-size: 1.5em;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
@@ -130,4 +131,40 @@
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
-  
+.keep-app-header {
+    height: 3em;
+    background-color: #3cbcc3;
+  }
+
+  .large-plus{
+      /* margin: 0 auto; */
+     
+      font-size: 6em;
+      color: #438945;
+      opacity: 0.4;
+  }
+  .large-plus:hover{
+      /* margin: 10% auto; */
+      
+      font-size: 6em;
+      color: #e2b625;
+      opacity: 0.6;
+  }
+
+#newNote {
+display: grid;
+grid-template-rows: 50px 50px 2fr 1fr;
+height: 100%;
+}
+
+.color-picker-container {
+    grid-row: 4;
+    margin: 10px;
+
+}
+
+.new-note-button-container {
+    display: flex;
+    align-items: top;
+    justify-content: center;
+}
