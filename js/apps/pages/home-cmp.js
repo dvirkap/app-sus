@@ -1,3 +1,12 @@
 export default {
-    template: `<h1>Home</h1>`,
+    template: `
+    <div class="main-home">
+    <div class="main-text-box" >
+        If css let's you down, just wait until you meet "Inner nested named router links"
+    </div>
+
+
+    </div>
+    `,
+
 }
