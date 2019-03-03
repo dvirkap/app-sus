@@ -83,6 +83,7 @@
     flex-direction: column;
     height: 100vh;
     /* background-color: yellow; */
+    /* overflow: scroll; */
 }
 
 .email-app-header {
@@ -215,7 +216,7 @@ input, button, select, optgroup, textarea {
     width: 25px;
     height: 25px;
     background-size: 100%;
-     outline: none;
+    outline: none;
     border: none;
 }
 
@@ -251,6 +252,8 @@ input, button, select, optgroup, textarea {
     background-color: #0079D4;
     outline: none;
     border: none;
+    width: 30px;
+    height: 30px;
 }
 
 /* .email-app-icon:hover {
@@ -312,7 +315,7 @@ input, button, select, optgroup, textarea {
     .email-app-header {
         justify-content: center;
     }
-    .email-app-main{
+    .email-app-main {
         flex-basis: 90%;
     }
 }
