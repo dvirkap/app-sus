@@ -11,7 +11,7 @@ export default {
     template: `
         <section class="email-app-container flex email-wrapper">
             <header class="email-app-header flex">
-                <button href="javascript:void(0);" class="icon" v-on:click="onToggleNav()">
+                <button href="javascript:void(0);" class="email-app-icon" v-on:click="onToggleNav()">
                     <i class="fa fa-bars"></i>
                 </button>
                 <!-- <h3 class="email-app-header-item">Appsus Email</h3> -->
@@ -34,7 +34,7 @@ export default {
                     <email-list v-show="!isCompose && !isDetails" v-bind:emails="emailsToShow" v-on:delete="onDeleteEmail" v-on:click.native="emailListClicked"></email-list>
                     <email-compose v-if="isCompose" v-on:close="onCloseCompose" v-on:send="onSendEmail" :emailProp="email" :reply="false"></email-compose>
                 </main>
-                <nav class="email-app-nav">
+                <nav class="email-app-nav-right">
                 </nav>
             </div>
             <!-- <router-link to="/about">Inbox</router-link> -->
@@ -66,6 +66,9 @@ export default {
             // console.log('Compose new email');
             this.$router.push('/email');
             this.isCompose = true;
+            if (!window.matchMedia("(min-width: 750px)").matches) {
+                this.isShowNav = false;
+            }
         },
         onCloseCompose() {
             this.isCompose = false;
@@ -101,12 +104,18 @@ export default {
             this.isCompose = false;
             this.isDetails = false;
             this.isInbox = true;
+            if (!window.matchMedia("(min-width: 750px)").matches) {
+                this.isShowNav = false;
+            }
             this.$router.push('/email');
         },
         onSentClicked() {
             this.isCompose = false;
             this.isDetails = false;
             this.isInbox = false;
+            if (!window.matchMedia("(min-width: 750px)").matches) {
+                this.isShowNav = false;
+            }
             this.$router.push('/email');
         },
         emailListClicked() {

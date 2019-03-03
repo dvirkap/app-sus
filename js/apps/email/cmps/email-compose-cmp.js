@@ -20,7 +20,7 @@ export default {
                 <!-- <label class="email-compose-label">Subject:</label> -->
                 <input class="email-compose-text" placeholder="Subject:" type="text" v-model="email.subject">
             </div>
-            <textarea class="email-compose-textarea" rows="12" cols="40" v-model="email.body"></textarea>
+            <textarea class="email-compose-textarea" rows="15" cols="40" v-model="email.body"></textarea>
             <div class="email-compose-btn-container flex">
                 <button class="email-compose-btn" v-on:click="onCloseCompose">Close</button>
                 <button class="email-compose-btn" v-on:click="onSendEmail" :disabled="isDisabled">Send</button>

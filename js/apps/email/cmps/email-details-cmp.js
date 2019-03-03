@@ -14,7 +14,7 @@ export default {
             <div v-show="!isReply">Cc: {{email.cc}}</div>
             <div v-show="!isReply">Sent at: {{fornatedDate}}</div>
             <!-- <hr> -->
-            <textarea v-show="!isReply" class="email-details-textarea" rows="12" cols="40" readonly>{{email.body}}</textarea>
+            <textarea v-show="!isReply" class="email-details-textarea" rows="15" cols="40" readonly>{{email.body}}</textarea>
             <!-- <p>{{email.body}}</p> -->
             <!-- <hr> -->
             <div v-show="!isReply" class="email-details-btn-container flex">
