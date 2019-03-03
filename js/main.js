@@ -25,12 +25,28 @@ window.vueApp = new Vue({
             <div class="main-hamburger-menu flex" v-show="isHamburger">
             <!-- isHamburger -->
                 <div class="flex">
-                    <i class="fas fa-home"></i>
-                    <i class="fas fa-info"></i>
-                </div>
-                <div class="flex">
-                    <i class="fas fa-lightbulb"></i>
-                    <i class="fas fa-at"></i>
+                    <ul class="main-hamburger-menu-ul">
+                        <li>
+                            <router-link to="/" exact v-on:click.native="onHamburgerClicked">
+                                <i class="fas fa-home"></i> Home
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/about" v-on:click.native="onHamburgerClicked">
+                                <i class="fas fa-info"></i> About
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/keep" v-on:click.native="onHamburgerClicked">
+                            <i class="fas fa-lightbulb"></i> Keep
+                            </router-link>
+                            </li>
+                        <li>
+                            <router-link to="/email" v-on:click.native="onHamburgerClicked">
+                                <i class="fas fa-at"></i> Email
+                            </router-link>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -43,9 +59,12 @@ window.vueApp = new Vue({
     methods: {
         onHamburgerClicked() {
             this.isHamburger = !this.isHamburger;
-            console.log(this.isHamburger);
+            // console.log(this.isHamburger);
             // <i class="fas fa-home"></i>
         }
+    },
+    hamburgerMenuClicked(){
+        this.isHamburger = !this.isHamburger;
     },
     components: {
 

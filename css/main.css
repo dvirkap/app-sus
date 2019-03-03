@@ -29,10 +29,22 @@ footer {
 }
 
 .main-hamburger-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: absolute;
+  top: 70px;
+  left: 0px;
   flex-direction: column;
+  background-color: #c5decd;
+  opacity: 0.8;
+  text-align: center;
+  padding: 0px 20px 10px 20px;
+  height: 100vh;
+  border-radius: 5px;
+}
+
+.main-hamburger-menu-ul {
+  font-size: 2em;
+  display: grid;
+  grid-gap: 20px;
 }
 
 body {
