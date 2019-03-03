@@ -1,8 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-* {
+@import url('https://fonts.googleapis.com/css?family=Caveat');
+*{
     box-sizing: border-box;
 }
-
+.main-app {
+    /* display: flex; */
+}
+nav {
+/* position: fixed; */
+top: 0px;
+/* height: 80px; */
+/* width: 100%;  */
+background-color: #3CBCC3;  
+}
+.main-router-view {
+    /* margin-top: 80px; */
+    
+}
 footer {
     position: fixed;
     bottom: 0;
@@ -34,10 +48,36 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: none;
-    cursor: pointer;
+a:hover 
+{
+     text-decoration:none; 
+     cursor:pointer;  
 }
+
+.main-text-box {
+    font-family: 'Caveat', cursive;
+    margin: 25vh ;
+    margin-left: 60px;
+    margin-right: 60px;
+    
+    /* width: 500px; */
+    /* height: 200px; */
+    padding: 40px;
+    border-radius: 5px;
+    background-color: rgb(43, 32, 48);
+    opacity: 0.9;
+    font-size: 2.5em;
+    color: aliceblue;
+}
+.main-home {
+    background-image: url(/img/mainbg.jpg);
+    background-size: cover;
+    /* filter: blur(8px); */
+    height: 90vh;
+    overflow-y: hidden;
+    
+}
+
 
 .main-nav {
     height: 50px;

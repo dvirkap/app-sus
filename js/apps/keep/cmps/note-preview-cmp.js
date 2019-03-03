@@ -35,8 +35,8 @@ export default {
     //     }
     // },
     created() {
-        // if (this.note.img !== 'image url')
-        //     console.log(this.note.img);
+        if (this.note.img !== 'image url')
+            console.log(this.note.img);
             
             // noteService.postionPinnedNotesOnTop(note.id)
         

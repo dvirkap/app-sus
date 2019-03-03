@@ -34,8 +34,8 @@ export default {
                     <email-list v-show="!isCompose && !isDetails" v-bind:emails="emailsToShow" v-on:delete="onDeleteEmail" v-on:click.native="emailListClicked"></email-list>
                     <email-compose v-if="isCompose" v-on:close="onCloseCompose" v-on:send="onSendEmail" :emailProp="email" :reply="false"></email-compose>
                 </main>
-                <nav class="email-app-nav-right">
-                </nav>
+                <!-- <nav class="email-app-nav-right">
+                </nav> -->
             </div>
             <!-- <router-link to="/about">Inbox</router-link> -->
             <!-- <user-msg></user-msg> -->

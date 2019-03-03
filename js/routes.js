@@ -19,7 +19,7 @@ const routes = [
     // { path: '/email/:emailId', component: emailDetails },
     {
         path: '/keep', component: keepApp, children:
-            [{ path: 'noteadd', component: noteAdd }]
+            [{ path: '/keep/noteadd', component: noteAdd }]
     },
     { path: '/keep/:noteId', component: noteDetails },
     // { path: '/addbook', component: booksAdd },
