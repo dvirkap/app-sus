@@ -22,7 +22,7 @@ export default {
                 <nav v-show="isShowNav" class="email-app-nav flex">
                 <!-- <button v-on:click="onComposeClicked">Compose</button> -->
                 <!-- <router-link class="font-bold" to="/email/compose" v-on:click.native="onComposeClicked">Compose</router-link> -->
-                    <button class="email-app-nav-item font-bold" v-on:click="onComposeClicked">Compose</button>
+                    <button class="email-app-nav-item" v-bind:class="classObjectCompose" v-on:click="onComposeClicked">Compose</button>
                     <button class="email-app-nav-item" v-bind:class="classObjectInbox" v-on:click="onInboxClicked">Inbox</button>
                     <button class="email-app-nav-item" v-bind:class="classObjectSent" v-on:click="onSentClicked">Sent</button>
                     <!-- <button v-on:click="onInboxClicked">Inbox</button> -->
@@ -66,6 +66,7 @@ export default {
             // console.log('Compose new email');
             this.$router.push('/email');
             this.isCompose = true;
+            this.isInbox = false;
             this.isDetails = false;
             if (!window.matchMedia("(min-width: 750px)").matches) {
                 this.isShowNav = false;
@@ -159,8 +160,14 @@ export default {
         },
         classObjectSent() {
             return {
-                'font-bold': !this.isInbox,
-                'font-normal': this.isInbox
+                'font-bold': !this.isInbox && !this.isCompose,
+                'font-normal': this.isInbox || this.isCompose
+            }
+        },
+        classObjectCompose() {
+            return {
+                'font-bold': this.isCompose,
+                'font-normal': !this.isCompose
             }
         }
     },

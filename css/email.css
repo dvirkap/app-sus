@@ -136,8 +136,13 @@
 }
 
 .email-app-nav-item:hover {
-    background-color: #B3D7F2;
-    color: black;
+    /* background-color: #3CBCC3; */
+    /* color: black; */
+}
+
+.email-app-nav-item:focus {
+    background-color: #3CBCC3;
+    /* color: black; */
 }
 
 email-app-header-item {
