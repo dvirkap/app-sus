@@ -108,9 +108,9 @@ export default {
     },
 
     mounted() {
-        this.$nextTick(()=> {
-            console.log()
-          }),
+        // this.$nextTick(()=> {
+        //     console.log()
+        //   }),
           
           eventBus.$on(NEW_NOTE_CREATED, newNote => {
               if(this.isRouterViewHidden === false) {
