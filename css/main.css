@@ -1,137 +1,145 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Caveat');
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
+
 .main-app {
-    /* display: flex; */
+  /* display: flex; */
 }
+
 nav {
-/* position: fixed; */
-/* top: 0px; */
-/* height: 80px; */
-/* width: 100%;  */
-background-color: #3CBCC3;  
+  /* position: fixed; */
+  /* top: 0px; */
+  /* height: 80px; */
+  /* width: 100%;  */
+  background-color: #3CBCC3;
 }
+
 .main-router-view {
-    /* margin-top: 80px; */
-    
+  /* margin-top: 80px; */
 }
+
 footer {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    /* width: 100%; */
-    /* font-weight: bold; */
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  /* width: 100%; */
+  /* font-weight: bold; */
+}
+
+.main-hamburger-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  flex-direction: column;
 }
 
 body {
-    margin: 0px;
-    font-family: 'Roboto', sans-serif;
-    /* background-color: #F7F4E9; */
-    background-color: #F7F4E9;
+  margin: 0px;
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #F7F4E9; */
+  background-color: #F7F4E9;
 }
 
 ul {
-    list-style-type: none;
-    padding: 0px;
+  list-style-type: none;
+  padding: 0px;
 }
 
 li {
-    text-decoration-style: none;
+  text-decoration-style: none;
 }
 
 a {
-    all: unset;
+  all: unset;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-a:hover 
-{
-     text-decoration:none; 
-     cursor:pointer;  
+a:hover {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .main-text-box {
-    font-family: 'Caveat', cursive;
-    margin: 25vh ;
-    margin-left: 60px;
-    margin-right: 60px;
-    
-    /* width: 500px; */
-    /* height: 200px; */
-    padding: 40px;
-    border-radius: 5px;
-    background-color: rgb(43, 32, 48);
-    opacity: 0.9;
-    font-size: 2.5em;
-    color: aliceblue;
-}
-.main-home {
-    background-image: url(/img/mainbg.jpg);
-    background-size: cover;
-    /* filter: blur(8px); */
-    height: 90vh;
-    overflow-y: hidden;
-    
+  font-family: 'Caveat', cursive;
+  margin: 25vh;
+  margin-left: 60px;
+  margin-right: 60px;
+  /* width: 500px; */
+  /* height: 200px; */
+  padding: 40px;
+  border-radius: 5px;
+  background-color: rgb(43, 32, 48);
+  opacity: 0.9;
+  font-size: 2.5em;
+  color: aliceblue;
 }
 
+.main-home {
+  background-image: url(/img/mainbg.jpg);
+  background-size: cover;
+  /* filter: blur(8px); */
+  height: 90vh;
+  overflow-y: hidden;
+}
 
 .main-nav {
-    height: 50px;
-    width: 100%;
-    background-color: #3cbcc3;
+  height: 50px;
+  width: 100%;
+  background-color: #3cbcc3;
 }
 
 .jello-horizontal {
-	animation: jello-horizontal 0.9s both;
+  animation: jello-horizontal 0.9s both;
 }
+
 @keyframes jello-horizontal {
-    0% {
-      transform: scale3d(1, 1, 1);
-    }
-    30% {
-      transform: scale3d(1.25, 0.75, 1);
-    }
-    40% {
-      transform: scale3d(0.75, 1.25, 1);
-    }
-    50% {
-      transform: scale3d(1.15, 0.85, 1);
-    }
-    65% {
-      transform: scale3d(0.95, 1.05, 1);
-    }
-    75% {
-      transform: scale3d(1.05, 0.95, 1);
-    }
-    100% {
-      transform: scale3d(1, 1, 1);
-    }
+  0% {
+    transform: scale3d(1, 1, 1);
   }
-  
-
-.about-main{
-    justify-content: space-around;
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
 }
 
-.about-main img{
-    border-radius: 50%;
+.about-main {
+  justify-content: space-around;
+}
+
+.about-main img {
+  border-radius: 50%;
 }
 
 .home-app-header {
-    height: 3em;
-    background-color: #3cbcc3;
-  }
+  height: 3em;
+  background-color: #3cbcc3;
+}
 
 .about-app-header {
-    height: 3em;
-    background-color: #3cbcc3;
-  }
-  .bars {
-      font-size: 3em;
-      margin: 10px;
-  }
+  height: 3em;
+  background-color: #3cbcc3;
+}
+
+.bars {
+  font-size: 3em;
+  margin: 10px;
+}
