@@ -11,20 +11,23 @@ export default {
     template: `
         <section class="email-app-container flex email-wrapper">
             <header class="email-app-header flex">
-                <h3>Appsus Email</h3>
+                <button href="javascript:void(0);" class="icon" v-on:click="onToggleNav()">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <!-- <h3 class="email-app-header-item">Appsus Email</h3> -->
                 <email-filter class="email-app-header-item" v-on:filtered="setFilter"></email-filter>
                 <email-sort class="email-app-header-item" v-bind:emails="emails"></email-sort>
             </header>
             <div class="email-app-content-container flex">
-                <nav class="email-app-nav flex">
+                <nav v-show="isShowNav" class="email-app-nav flex">
                 <!-- <button v-on:click="onComposeClicked">Compose</button> -->
                 <!-- <router-link class="font-bold" to="/email/compose" v-on:click.native="onComposeClicked">Compose</router-link> -->
-                    <a class="email-app-nav-item font-bold" v-on:click="onComposeClicked">Compose</a>
-                    <a class="email-app-nav-item" v-bind:class="classObjectInbox" v-on:click="onInboxClicked">Inbox</a>
-                    <a class="email-app-nav-item" v-bind:class="classObjectSent" v-on:click="onSentClicked">Sent</a>
+                    <button class="email-app-nav-item font-bold" v-on:click="onComposeClicked">Compose</button>
+                    <button class="email-app-nav-item" v-bind:class="classObjectInbox" v-on:click="onInboxClicked">Inbox</button>
+                    <button class="email-app-nav-item" v-bind:class="classObjectSent" v-on:click="onSentClicked">Sent</button>
                     <!-- <button v-on:click="onInboxClicked">Inbox</button> -->
                     <!-- <button v-on:click="onSentClicked">Sent</button> -->
-                    <email-status class="email-app-nav-item" v-bind:emails="emails"></email-status>
+                    <email-status class="email-app-nav-status" v-bind:emails="emails"></email-status>
                 </nav>
                 <main class="email-app-main">
                     <router-view></router-view>
@@ -48,6 +51,7 @@ export default {
             isCompose: false,
             isInbox: true,
             isDetails: false,
+            isShowNav: true,
             email: {
                 from: 'nirfuchs@appsus.com',
                 to: 'nirfuchs@appsus.com',
@@ -108,6 +112,9 @@ export default {
         emailListClicked() {
             // console.log('emailListClicked');
             this.isDetails = true;
+        },
+        onToggleNav() {
+            this.isShowNav = !this.isShowNav;
         }
     },
     computed: {

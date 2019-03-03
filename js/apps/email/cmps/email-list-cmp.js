@@ -3,7 +3,7 @@ import emailPreview from './email-preview-cmp.js';
 export default {
     props: ['emails'],
     template: `
-        <section>
+        <!-- <section> -->
             <!-- <div>Email List</div> -->
             <div class="email-list">
                 <table border="1">
@@ -32,7 +32,7 @@ export default {
                 <email-preview v-for="(currEmail, idx) in emails" v-bind:email="currEmail" :key="currEmail.id" v-on:click.native="selectEmail(currEmail)">
                 </email-preview>
             </div>-->
-        </section>
+        <!-- </section> -->
     `,
     data() {
         return {
