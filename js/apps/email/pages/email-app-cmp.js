@@ -66,6 +66,7 @@ export default {
             // console.log('Compose new email');
             this.$router.push('/email');
             this.isCompose = true;
+            this.isDetails = false;
             if (!window.matchMedia("(min-width: 750px)").matches) {
                 this.isShowNav = false;
             }
