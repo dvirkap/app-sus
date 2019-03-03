@@ -10,12 +10,13 @@ window.vueApp = new Vue({
     template: `
         <section>
             <div class="main-nav">
-                <nav>
-                    <i class="fas fa-hamburger bars" v-on:click="onHamburgerClicked"></i>
-                    <!-- <router-link to="/" exact>Home</router-link>
-                    <router-link to="/keep">Keep</router-link>
-                    <router-link to="/email">Email</router-link>
-                    <router-link to="/about">About</router-link> -->
+                <nav class="main-nav-menu">
+                    <!-- <i class="fas fa-hamburger bars" v-on:click="onHamburgerClicked"></i> -->
+                    
+                    <router-link to="/" exact><i class="fas fa-home"> Home</i></router-link>
+                    <router-link to="/keep"><i class="fas fa-thumbtack"> Keep</i></router-link>
+                    <router-link to="/email"><i class="far fa-envelope"> Email</i></router-link>
+                    <router-link to="/about"><i class="far fa-user"> About</i></router-link>
                 </nav>
             </div>
             <router-view></router-view>
