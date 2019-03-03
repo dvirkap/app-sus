@@ -6,7 +6,8 @@ export default {
     getNotesById,
     addNote,
     saveNotesById,
-    movePinnedNotesToTop
+    movePinnedNotesToTop,
+    deleteNoteById
 }
 const NOTES_KEY = 'notes';
 var numberOfNotes = 10;
@@ -33,7 +34,7 @@ function createDummyNotes(number) {
                 "sound": "sound url from local storage",
                 "isPinned": -1,
                 "isDeleted": false,
-                "color": "red"
+                "color": "#fff"
 
             })
         }
@@ -51,7 +52,7 @@ function addNote(noteObj) {
     
     gNotes.push(note);
     storage.store(NOTES_KEY, gNotes);
-    return Promise.resolve(gNotes);
+    return Promise.resolve(note);
 }
 
 function saveToStorage() {
@@ -88,6 +89,14 @@ function saveNotesById(CurrNoteId, note) {
         gNotes.splice(prevNoteIdx, 1, note)
     storage.store(NOTES_KEY, gNotes);
     return Promise.resolve(gNotes);
+}
+function deleteNoteById(CurrNoteId) {
+    gNotes = storage.load(NOTES_KEY);
+    var deleteNoteIdx = gNotes.findIndex(note => {
+        return CurrNoteId === note.id})
+        gNotes.splice(deleteNoteIdx, 1)
+    storage.store(NOTES_KEY, gNotes);
+    return Promise.resolve('deleted');
 }
 
 function movePinnedNotesToTop() {

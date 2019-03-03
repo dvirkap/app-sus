@@ -8,26 +8,31 @@ export default {
     template: `
 <!-- <section> -->
     <div >
-        <form id="newNote" @click="listenToClick">
-        <input type="text"  v-bind:class="{ alert: isTitleActive }" @input="addNewNote()" v-model="myTitle" placeholder="Title">
+        <form id="newNote" @click="listenToClick" ref="form">
+        <input type="text" id="title" ref="title" v-bind:class="{ alert: isTitleActive }" @input="addNewNote()" v-model="myTitle" placeholder="Title">
         <input type="text" @input="addNewNote()" v-model="categories" placeholder="categories">
         <textarea v-bind:class="{ alert: isTextActive }" @input="addNewNote()" v-model="myText" placeholder="Add a few words..."></textarea>
         <!-- <button @click="getNewNoteType('video')">video</button> -->
         <img class="keep-new-note-img" v-bind:src="imageurl" /> 
         <!-- <img class="keep-new-note-img" v-bind:src="videourl + 'hqdefault.jpg'" />  -->
         <iframe :class="{'keep-hidden' : !videourl}" class="keep-new-note-img" v-bind:src="'https://www.youtube.com/embed/' + videourl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
-        <input class="fas fa-palette jscolor" ref="colorVal" @change="updateColor">
+        <!-- <input class="fas fa-palette jscolor" ref="colorVal" @change="updateColor"> -->
+        <button @click="updateColor" class="color-dot" v-bind:style="{ 'background-color': '#6495ED' }"></button>
+        <button @click="updateColor" class="color-dot" v-bind:style="{ 'background-color': '#FF69B4' }"></button>
+        <button @click="updateColor" class="color-dot" v-bind:style="{ 'background-color': '#E0FFFF' }"></button>
+        <button @click="updateColor" class="color-dot" v-bind:style="{ 'background-color': '#00FA9A' }"></button>
+        <button @click="saveNewNote" >Close</button>
 
         </form>
     
-    <pre>{{newNote}}</pre>
+    <!-- <pre>{{newNote}}</pre>
     {{myTitle}}
     {{myText}}
-    {{categories}}
+    {{categories}} -->
   
     <!-- <section> -->
         </div>
-   
+        
 
 `,
 
@@ -51,39 +56,55 @@ data() {
         }
     },
     methods: {
+        saveNewNote() {
+            eventBus.$emit(NEW_NOTE_CREATED, this.isNoteCreated);
+            
+            },
         listenToClick(ev){
+        //    console.log('ev:', ev.target.id);  
+           if(this.$refs.title.id !== ev.target.id )
+           console.log('success');
+           
+        //    console.log('ev  :', this.$refs.title.id);  
+        //    console.log('ev:', ev.target.id);  
            
         },
-        updateColor() {
+        updateColor(val) {
+            console.log('this.colorVal:',val.target.style.backgroundColor );
+            this.colorVal = val.target.style.backgroundColor
+            console.log(this.$refs.form.style.backgroundColor = this.colorVal);
+            
             // 'jscolor' instance can be used as a string
-           var currColor = this.$refs.colorVal.style.backgroundColor;
-           this.colorVal = currColor;
-            this.$emit('bgcolor', this.colorVal)
-            // console.log('this.colorVal',this.colorVal );
+        //    var currColor = this.$refs.colorVal.style.backgroundColor;
+        //    this.colorVal = currColor;
+        //     this.$emit('bgcolor', this.colorVal)
          
             
         },
         addNewNote() {
             if (this.myText) {
-                // var str = 
-                // var str = 
-                console.log('this.isNoteCreated', this.isNoteCreated);
-                
-                // var result = regExp(str, '(?<=http).+?(?=jpg)', 'match')
                 if(this.myTitle && this.myText && this.isNoteCreated === false) {
+                    
                     this.isNoteCreated  = true
-                    eventBus.$emit(NEW_NOTE_CREATED, this.isNoteCreated);
                     
-                    //    this.$emit('new-note-created', this.isNoteCreated)
-                    //    NEW_NOTE_CREATED = 'new-note-created';
+                    // console.log('outside touch detected');
+                    // console.log('note.id:', this.newNote.id);
+                    noteService.addNote(this.newNote).then((res) => {
+                        console.log('idddd:',res.id);
+                        // console.log('yes');
+                        this.noteId = res.id
+
+                    })
+                }
+                if(this.isNoteCreated) {
+                    // noteService.getNotesById()
+                    // this.newNote.id = this.noteId;
+                    // console.log('update note by id',this.newNote.id );
+                    noteService.saveNotesById(this.noteId, this.newNote)
+                    // noteService.saveNotesById(this.newNote.id, this.newNote)
                     
-                    // console.log(ev.target.localName);
-                    console.log('outside touch detected');
-                    console.log('note.id:', this.newNote.id);
-                    noteService.addNote(this.newNote).then(() => {
-                        console.log('yes');
-        })
-             }
+                }
+                // console.log('this.isNoteCreated', this.isNoteCreated);
                 
                 if(this.myText.includes('jpeg') || this.myText.includes('png') || this.myText.includes('gif') || this.myText.includes('jpeg')|| this.myText.includes('picsum')) {
                     this.noteType = 'image'
@@ -95,7 +116,7 @@ data() {
                     var imageurl = result
                     this.imageurl = imageurl;
                     console.log('restul:', result);
-                    
+                    // noteService.saveNotesById(this.newNote.id, this.newNote)
                     
                 }
                 
@@ -112,7 +133,7 @@ data() {
                     result = regExp.exec(currVideoUrl);
                     this.videourl = result[0].substring(1)
                     console.log(this.videourl);
-                    
+                    // noteService.saveNotesById(this.newNote.id, this.newNote)
                 }
                 
             }
@@ -178,6 +199,8 @@ watch: {
     noteId(val) {
         if(!val) {
            val = createNoteId.makeId(8)
+           console.log('iddddd:', this.noteId);
+           
         }
     },
 

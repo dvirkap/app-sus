@@ -8,11 +8,11 @@ export default {
         <!-- <h2>User {{ $route.params.id }}</h2> -->
         
     <ul class="keep-list-container ">
-        <li  class="shadow-drop-2-center " :class="{'keep-expand-note-container' : isAddNewNoteButtonVisibile}" :style="{backgroundColor: colorVal}" v-on:bgcolor="newcolor">
-            <div id="newNote"  ref="note" :class="{'keep-hidden' : isRouterViewHidden}" >
+        <li  class="shadow-drop-2-center " ref="liNewNote" :class="{'keep-expand-note-container' : isAddNewNoteButtonVisibile}" :style="{backgroundColor: colorVal}" v-on:bgcolor="newcolor">
+            <div id="newNote"  ref="note" :class="{'keep-hidden' : isRouterViewHidden}" @click="outsideTheBox">
                     <router-view></router-view>
                 </div>
-                <div :class="{'keep-hidden' : isAddNewNoteButtonVisibile}"  @click="addNewNote" >
+                <div ref="addNewNoteButton" :class="{'keep-hidden' : isAddNewNoteButtonVisibile}"  @click="addNewNote" >
                     <router-link to="/keep/noteadd">
                     <div class="keep-preview-title">Click to add Note</div>
                     <div class="keep-preview-txt">+</div>
@@ -45,7 +45,10 @@ export default {
         }
     },
     methods: {
-
+        outsideTheBox() {
+            console.log('note ref', this.$refs.note.id);
+            
+        },
         
         editNote() {
             this.isEditNoteVisible = true;
@@ -72,7 +75,11 @@ export default {
         
         noteService.getNotes()
             .then(notes => this.notes = notes),
-
+            this.notes.filter(note => {
+                note.isDeleted === false;
+                console.log(note);
+                
+            }),
             function() {
                 window.addEventListener('mousedown',this.listenToClick);
             }
@@ -87,7 +94,13 @@ export default {
       },
 
     computed: {
-        
+        // function() {
+        //     newthis.notes.filter(note => {
+        //         console.log(note);
+        //      return   note.isDeleted === false;
+                
+        //     })
+        // }
         
     },
     components: {
@@ -97,17 +110,31 @@ export default {
     mounted() {
         this.$nextTick(()=> {
             console.log()
-          })
+          }),
+          
           eventBus.$on(NEW_NOTE_CREATED, newNote => {
-            console.log('new note:', newNote);
+              if(this.isRouterViewHidden === false) {
+                  this.isRouterViewHidden = true;
+              }
+              if(this.isAddNewNoteButtonVisibile === true) {
+                  this.isAddNewNoteButtonVisibile = false;
+              }
+              
+              console.log('note ref after mounted:', this.$refs.note.classList.toggle('keep-hidden'));
+              console.log('note ref after mounted:', this.$refs.liNewNote.classList.toggle('keep-expand-note-container'));
+              console.log('note ref after mounted:', this.$refs.addNewNoteButton.classList.toggle('keep-hidden'));
+              console.log('new note:', newNote);
+              noteService.getNotes()
+              .then(notes => this.notes = notes)
         })
-          
-          
-        },
-
+        
+        
+    },
+    
     watch: {
 
     },
+    
 
 
 }

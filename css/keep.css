@@ -89,3 +89,13 @@
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
 }
+/* COLOR PICKER */
+.color-dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+

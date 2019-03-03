@@ -3,7 +3,7 @@ import noteService from '../services/note-service.js';
 export default {
     template: `
     <section v-if="note">
-        <form>
+        <form :style="{backgroundColor: note.colorVal}">
         <div class="keep-title-input" @click="editTitle" v-bind:class="{ 'keep-hidden': !isTitleInEditMode }">{{note.title}}</div>
         <input type="text" ref="titleInput" class="keep-title-input" v-model="myTitle" v-bind:class="{ 'keep-hidden': isTitleInEditMode }" @input="editNote()" placeholder="title">
 
@@ -14,7 +14,7 @@ export default {
         <!-- <input class="fas fa-palette jscolor" ref="colorVal" @change="updateColor"> -->
         <!-- <input type="text" @input="editNote()" v-model="categories" placeholder="categories"> -->
         <button @click="isPinned()">Pin note</button>
-        <button @click="isDeleted()">Pin note</button>
+        <button @click="isDeleted()">Delete</button>
         <button @click="$router.push('/keep')" >Save</button>
 </form>
         <div>{{ $route.params}}    </div>
@@ -41,11 +41,20 @@ export default {
             myText: null,
             isTitleInEditMode: true,
             isTextInEditMode: true,
+            deleteNote: false,
             
         }
     },
 
     methods: {
+
+        isDeleted() {
+            this.isDeleted = true;
+            noteService.deleteNoteById(this.note.id)
+            // this.note.isDeleted = true;
+            // noteService.saveNotesById(this.note.id, this.note)
+            this.$router.push('/keep')
+        },
         editTitle() {
             if (this.note) {
                 this.myTitle = this.note.title;
