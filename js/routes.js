@@ -11,24 +11,19 @@ import emailDetails from './apps/email/cmps/email-details-cmp.js';
 const routes = [
     { path: '/', component: homeCmp },
     { path: '/about', component: aboutCmp },
-    { path: '/email', component: emailApp },
-    { path: '/email/:emailId', component: emailDetails },
-    { path: '/keep', component: keepApp, children: [
-        
-        { path: '/keep/noteadd', components: {
-            newnote: noteAdd
-        }  },
-                    {path: '/keep/:noteId', components: {
-                        editnote: noteDetails
-                    } },
-
-] },
-    // { path: '/keep/:noteId', component: noteDetails }
-    ]
-    
-    // { path: '/keep/:noteId', component: noteDetails },
+    {
+        path: '/email', component: emailApp, children:
+            [{ path: '/email/:emailId', component: emailDetails }]
+    },
+    // { path: '/email/compose', component: emailCompose },
+    // { path: '/email/:emailId', component: emailDetails },
+    {
+        path: '/keep', component: keepApp, children:
+            [{ path: 'noteadd', component: noteAdd }]
+    },
+    { path: '/keep/:noteId', component: noteDetails },
     // { path: '/addbook', component: booksAdd },
 
-
+]
 
 export default routes;

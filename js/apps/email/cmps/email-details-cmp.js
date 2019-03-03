@@ -1,39 +1,80 @@
 import emailService from '../services/email-service.js';
-
+import emailCompose from '../cmps/email-compose-cmp.js';
+import userMsg from './user-msg-cmp.js';
+import { eventBus, SEND_EMAIL, DETAILS_CLOSED } from '../../services/eventbus-service.js';
 
 export default {
-    // props: ['book'],
+    // props: ['email'],
     template: `
-        <section v-if="email" class="email-details email-wrapper">
-            <h4>{{email.subject}}</h4>
-            <h6>From: {{email.from}}</h6>
-            <h6>To: {{email.to}}</h6>
-            <h6>Cc: {{email.cc}}</h6>
-            <h6>Sent at: {{fornatedDate}}</h6>
-            <hr>
-            <p>{{email.body}}</p>
-            <hr>
-            <button v-on:click="onDeleteEmail">Delete</button>
-            <button v-on:click="onUnreadEmail">Make unread</button>
-            <p><router-link to="/email">Back to Inbox</router-link></p>
+        <section v-if="email" class="email-details flex">
+            <div v-show="!isReply" class="font-bold">{{email.subject}}</div>
+            <div v-show="!isReply">From: {{email.from}}</div>
+            <div v-show="!isReply">To: {{email.to}}</div>
+            <div v-show="!isReply">Cc: {{email.cc}}</div>
+            <div v-show="!isReply">Sent at: {{fornatedDate}}</div>
+            <!-- <hr> -->
+            <textarea v-show="!isReply" class="email-details-textarea" rows="12" cols="40" readonly>{{email.body}}</textarea>
+            <!-- <p>{{email.body}}</p> -->
+            <!-- <hr> -->
+            <div v-show="!isReply" class="email-details-btn-container flex">
+                <!-- <router-link to="/email" class="email-details-link">Back to Inbox</router-link> -->
+                <button class="email-details-btn" v-on:click="onCloseEmail">Close</button>
+                <button class="email-details-btn" v-on:click="onReplyEmail">Reply</button>
+                <button class="email-details-btn" v-on:click="onUnreadEmail">Make unread</button>
+                <button class="email-details-btn" v-on:click="onDeleteEmail">Delete</button>
+            </div>
+            <email-compose v-if="isReply" v-on:close="onCloseReply" v-on:send="onSendReplyEmail" :emailProp="email" :reply="true"></email-compose>
+            <!-- <user-msg></user-msg> -->
         </section>
     `,
     data() {
         return {
             email: null,
+            isReply: false
         }
     },
     methods: {
+        onCloseEmail() {
+            eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
+            this.$router.push('/email');
+        },
         onDeleteEmail() {
             emailService.deleteEmail(this.email.id)
                 .then(() => {
                     console.log('Email was deleted');
                     this.$router.push('/email');
                 });
+            eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
         },
         onUnreadEmail() {
             this.email.isRead = false;
+            eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
             this.$router.push('/email');
+        },
+        onReplyEmail() {
+            this.isReply = true;
+        },
+        onCloseReply() {
+            // console.log('onCloseReply');
+            eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
+            this.isReply = false;
+            this.$router.push('/email');
+        },
+        onSendReplyEmail(emailObj) {
+            // console.log(emailObj);
+            emailObj.sentAt = Date.now();
+            emailService.addEmail(emailObj)
+                .then((res) => {
+                    // console.log('Reply Email was sent');
+                    var message = { msg: 'Success! Reply Email was sent', type: 'success' };
+                    eventBus.$emit(SEND_EMAIL, { ...message });
+                    this.isReply = false;
+                    this.$router.push('/email');
+                }).catch((res) => {
+                    var message = { msg: 'Error! ' + res, type: 'error' };
+                    eventBus.$emit(SEND_EMAIL, { ...message });
+                });
+            eventBus.$emit(DETAILS_CLOSED, 'Details was closed');
         }
     },
     computed: {
@@ -62,6 +103,7 @@ export default {
     },
 
     components: {
-
+        emailCompose,
+        userMsg
     }
 }
