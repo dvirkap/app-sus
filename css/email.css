@@ -114,7 +114,7 @@
 }
 
 .email-app-main {
-    flex-basis: 70%;
+    flex-basis: 100%;
     background-color: #FFFFFF;
 }
 
@@ -154,20 +154,37 @@ input, button, select, optgroup, textarea {
     line-height: inherit;
 }
 
-.email-list table, th, td {
+/* .email-list table, th, td {
     border-collapse: collapse;
     border-right-style: none;
     border-left-style: none;
     width: 280px;
-    /* border:1px; */
-    /* border: 1px solid black; */
-}
+    border: 1px;
+    border: 1px solid black;
+} */
 
-.email-list-td {
-    /* margin-bottom: 20px; */
-    /* padding: 14px 16px; */
+/* .email-list-td {
+    margin-bottom: 20px;
+    padding: 14px 16px;
     vertical-align: middle;
     width: 280px;
+} */
+
+.email-list-row {
+    justify-content: space-between;
+    border: 1px solid black;
+    border-right-style: none;
+    border-left-style: none;
+    border-top-style: none;
+}
+
+.email-list-preview {
+    margin: 8px;
+}
+
+.email-list-row:hover {
+    background-color: #ddd;
+    color: black;
 }
 
 .email-list-td:hover {
@@ -180,8 +197,8 @@ input, button, select, optgroup, textarea {
     width: 25px;
     height: 25px;
     background-size: 100%;
-    /* flex: 1; */
-    /* margin: 3px; */
+    outline: none;
+    border: none;
 }
 
 .email-list-btn-read {
@@ -189,8 +206,8 @@ input, button, select, optgroup, textarea {
     width: 25px;
     height: 25px;
     background-size: 100%;
-    /* flex: 1; */
-    /* margin: 3px; */
+    outline: none;
+    border: none;
 }
 
 .email-list-btn-delete {
@@ -198,6 +215,8 @@ input, button, select, optgroup, textarea {
     width: 25px;
     height: 25px;
     background-size: 100%;
+     outline: none;
+    border: none;
 }
 
 .red-bg {
@@ -258,17 +277,17 @@ input, button, select, optgroup, textarea {
     .email-details {
         font-size: 1.1rem;
     }
-    .email-list table, th, td {
-        border-collapse: collapse;
-        width: 500px;
-        /* width: 600px; */
-        /* border:1px; */
-        /* border: 1px solid black; */
-    }
-    .email-list-td {
-        width: 500px;
-        /* width: 600px; */
-    }
+    /* .email-list table, th, td { */
+    /* border-collapse: collapse; */
+    /* width: 500px; */
+    /* width: 600px; */
+    /* border:1px; */
+    /* border: 1px solid black; */
+    /* } */
+    /* .email-list-td { */
+    /* width: 500px; */
+    /* width: 600px; */
+    /* } */
     .email-app-nav-right {
         display: inline-block;
     }
@@ -292,5 +311,8 @@ input, button, select, optgroup, textarea {
     }
     .email-app-header {
         justify-content: center;
+    }
+    .email-app-main{
+        flex-basis: 70%;
     }
 }
