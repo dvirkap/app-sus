@@ -88,3 +88,10 @@ a:hover
 	animation: jello-horizontal 0.9s both;
 }
 
+.about-main{
+    justify-content: space-around;
+}
+
+.about-main img{
+    border-radius: 50%;
+}
