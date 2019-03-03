@@ -22,7 +22,7 @@
 
 .email-compose {
     flex-direction: column;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .email-compose-label {
@@ -49,7 +49,7 @@
 
 .email-details {
     flex-direction: column;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .email-details-textarea {
@@ -79,7 +79,7 @@
 } */
 
 .email-app-container {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     flex-direction: column;
     height: 100vh;
     /* background-color: yellow; */
@@ -106,12 +106,29 @@
 }
 
 .email-app-main {
-    flex-basis: 80%;
+    flex-basis: 70%;
     background-color: #FFFFFF;
 }
 
+.email-app-nav-status {
+    /* margin: 10px 20px 10px 20px   */
+    background-color: #F5F5F5;
+    height: 40px;
+    outline: none;
+    border: none;
+}
+
 .email-app-nav-item {
-    margin: 10px 20px 10px 20px
+    background-color: #F5F5F5;
+    height: 40px;
+    /* border-style: outset; */
+    outline: none;
+    border: none;
+}
+
+.email-app-nav-item:hover {
+    background-color: #B3D7F2;
+    color: black;
 }
 
 email-app-header-item {
@@ -119,7 +136,7 @@ email-app-header-item {
 }
 
 .email-list {
-    /* font-size: 0.9rem; */
+    /* font-size: 0.8rem; */
 }
 
 input, button, select, optgroup, textarea {
@@ -139,13 +156,21 @@ input, button, select, optgroup, textarea {
 }
 
 .email-list-td {
+    /* margin-bottom: 20px; */
+    /* padding: 14px 16px; */
+    vertical-align: middle;
     width: 280px;
+}
+
+.email-list-td:hover {
+    background-color: #ddd;
+    color: black;
 }
 
 .email-list-btn-unread {
     background: url('../icons/Mail-05.png') no-repeat left center;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     background-size: 100%;
     /* flex: 1; */
     /* margin: 3px; */
@@ -153,8 +178,8 @@ input, button, select, optgroup, textarea {
 
 .email-list-btn-read {
     background: url('../icons/Mail-read-01.png') no-repeat left center;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     background-size: 100%;
     /* flex: 1; */
     /* margin: 3px; */
@@ -162,8 +187,8 @@ input, button, select, optgroup, textarea {
 
 .email-list-btn-delete {
     background: url('../icons/Delete-01.png') no-repeat left center;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     background-size: 100%;
 }
 
@@ -186,6 +211,14 @@ input, button, select, optgroup, textarea {
     border-radius: 25px;
 }
 
+/* .bg-color-hotmail {
+    background-color: #B3D7F2;
+} */
+
+/* .color-hotmail {
+    color:#218ADA
+} */
+
 @media (min-width: 750px) {
     .email-wrapper {
         max-width: 1000px;
@@ -193,24 +226,26 @@ input, button, select, optgroup, textarea {
         margin: 0 auto;
     }
     .email-app-container {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     .email-list {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     .email-compose {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     .email-details {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     .email-list table, th, td {
         border-collapse: collapse;
         width: 500px;
+        /* width: 600px; */
         /* border:1px; */
         /* border: 1px solid black; */
     }
     .email-list-td {
         width: 500px;
+        /* width: 600px; */
     }
 }
