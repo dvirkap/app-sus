@@ -43,3 +43,11 @@ a:hover {
     height: 50px;
     width: 100%;
 }
+
+.about-main{
+    justify-content: space-around;
+}
+
+.about-main img{
+    border-radius: 50%;
+}
