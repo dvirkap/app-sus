@@ -92,7 +92,7 @@ a:hover {
 }
 
 .main-home {
-  background-image: url(/img/mainbg.jpg);
+  background-image: url('../img/mainbg.jpg');
   background-size: cover;
   /* filter: blur(8px); */
   height: 90vh;
